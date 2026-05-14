@@ -14,7 +14,6 @@
     --bg2: #111118;
     --bg3: #1a1a25;
     --card: #16161f;
-    --card2: #1e1e2d;
     --border: #2a2a3d;
     --text: #e8e8f0;
     --text2: #8888aa;
@@ -25,529 +24,171 @@
     --red: #ff6b6b;
     --red-bg: rgba(255,107,107,0.12);
     --yellow: #ffd93d;
-    --yellow-bg: rgba(255,217,61,0.12);
-    --orange: #ff9f43;
-    --blue: #54a0ff;
-    --pink: #ff6bcb;
     --gradient: linear-gradient(135deg, #6c5ce7, #a29bfe);
   }
 
-  body {
-    font-family: 'Inter', -apple-system, sans-serif;
-    background: var(--bg);
-    color: var(--text);
-    min-height: 100vh;
-    overflow-x: hidden;
-  }
+  body { font-family: 'Inter', sans-serif; background: var(--bg); color: var(--text); min-height: 100vh; overflow-x: hidden; }
 
-  /* ANIMATED BACKGROUND */
-  #particles-canvas {
-    position: fixed;
-    top: 0; left: 0; width: 100%; height: 100%;
-    z-index: 0;
-    pointer-events: none;
-  }
+  #particles-canvas { position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: 0; pointer-events: none; }
 
-  .container {
-    position: relative;
-    z-index: 1;
-    max-width: 1280px;
-    margin: 0 auto;
-    padding: 0 24px;
-  }
+  .container { position: relative; z-index: 1; max-width: 1280px; margin: 0 auto; padding: 0 24px; }
 
-  /* HEADER */
-  .header {
-    padding: 48px 0 32px;
-    text-align: center;
-    position: relative;
-  }
+  .header { padding: 48px 0 32px; text-align: center; }
+  .header-badge { display: inline-flex; align-items: center; gap: 8px; padding: 6px 16px; background: var(--bg3); border: 1px solid var(--border); border-radius: 100px; font-size: 12px; font-weight: 500; color: var(--text2); margin-bottom: 20px; }
+  .header-badge .dot { width: 6px; height: 6px; border-radius: 50%; background: var(--green); animation: pulse-dot 2s ease-in-out infinite; }
+  @keyframes pulse-dot { 0%,100%{opacity:1;transform:scale(1)} 50%{opacity:0.5;transform:scale(0.8)} }
+  .header h1 { font-size: clamp(32px,5vw,56px); font-weight: 900; background: linear-gradient(135deg,#fff 0%,#a29bfe 50%,#6c5ce7 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; line-height: 1.15; margin-bottom: 12px; }
+  .header p { color: var(--text2); font-size: 16px; max-width: 600px; margin: 0 auto; line-height: 1.6; }
 
-  .header-badge {
-    display: inline-flex;
-    align-items: center;
-    gap: 8px;
-    padding: 6px 16px;
-    background: var(--bg3);
-    border: 1px solid var(--border);
-    border-radius: 100px;
-    font-size: 12px;
-    font-weight: 500;
-    color: var(--text2);
-    margin-bottom: 20px;
-    letter-spacing: 0.5px;
-  }
+  .stats-row { display: grid; grid-template-columns: repeat(auto-fit,minmax(140px,1fr)); gap: 12px; margin: 32px 0; }
+  .stat-card { background: var(--card); border: 1px solid var(--border); border-radius: 12px; padding: 20px; text-align: center; transition: .3s; cursor: default; }
+  .stat-card:hover { transform: translateY(-4px); border-color: var(--accent); }
+  .stat-number { font-size: 28px; font-weight: 800; background: var(--gradient); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+  .stat-label { font-size: 12px; color: var(--text2); margin-top: 4px; font-weight: 500; text-transform: uppercase; letter-spacing: .5px; }
+  .stat-card.green .stat-number{background:linear-gradient(135deg,#00d68f,#00b894);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+  .stat-card.red .stat-number{background:linear-gradient(135deg,#ff6b6b,#ee5a24);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+  .stat-card.orange .stat-number{background:linear-gradient(135deg,#ff9f43,#f0932b);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+  .stat-card.blue .stat-number{background:linear-gradient(135deg,#54a0ff,#2e86de);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+  .stat-card.pink .stat-number{background:linear-gradient(135deg,#ff6bcb,#e84393);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
 
-  .header-badge .dot {
-    width: 6px; height: 6px;
-    border-radius: 50%;
-    background: var(--green);
-    animation: pulse-dot 2s ease-in-out infinite;
-  }
+  .filter-section { margin: 24px 0; }
+  .filter-tabs { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 16px; }
+  .filter-tab { padding: 8px 18px; border-radius: 100px; background: var(--bg3); border: 1px solid var(--border); color: var(--text2); font-size: 13px; font-weight: 500; cursor: pointer; transition: .3s; font-family: 'Inter',sans-serif; white-space: nowrap; }
+  .filter-tab:hover { border-color: var(--accent); color: var(--text); }
+  .filter-tab.active { background: var(--accent); border-color: var(--accent); color: #fff; }
+  .search-bar { display: flex; gap: 12px; align-items: center; }
+  .search-bar input { flex: 1; padding: 12px 20px; background: var(--bg3); border: 1px solid var(--border); border-radius: 100px; color: var(--text); font-size: 14px; font-family: 'Inter',sans-serif; outline: none; transition: .3s; }
+  .search-bar input:focus { border-color: var(--accent); }
+  .search-bar input::placeholder { color: var(--text2); }
+  .priority-toggle { display: flex; align-items: center; gap: 8px; padding: 12px 20px; background: var(--green-bg); border: 1px solid rgba(0,214,143,0.2); border-radius: 100px; color: var(--green); font-size: 13px; font-weight: 600; cursor: pointer; transition: .3s; font-family: 'Inter',sans-serif; white-space: nowrap; }
+  .priority-toggle:hover { background: rgba(0,214,143,0.2); }
+  .priority-toggle.active { background: rgba(0,214,143,0.25); border-color: var(--green); }
 
-  @keyframes pulse-dot {
-    0%, 100% { opacity: 1; transform: scale(1); }
-    50% { opacity: 0.5; transform: scale(0.8); }
-  }
-
-  .header h1 {
-    font-size: clamp(32px, 5vw, 56px);
-    font-weight: 900;
-    background: linear-gradient(135deg, #fff 0%, #a29bfe 50%, #6c5ce7 100%);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
-    line-height: 1.15;
-    margin-bottom: 12px;
-  }
-
-  .header p {
-    color: var(--text2);
-    font-size: 16px;
-    max-width: 600px;
-    margin: 0 auto;
-    line-height: 1.6;
-  }
-
-  /* STATS ROW */
-  .stats-row {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
-    gap: 12px;
-    margin: 32px 0;
-  }
-
-  .stat-card {
-    background: var(--card);
-    border: 1px solid var(--border);
-    border-radius: 12px;
-    padding: 20px;
-    text-align: center;
-    transition: transform 0.3s, border-color 0.3s;
-  }
-
-  .stat-card:hover {
-    transform: translateY(-4px);
-    border-color: var(--accent);
-  }
-
-  .stat-number {
-    font-size: 28px;
-    font-weight: 800;
-    background: var(--gradient);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
-  }
-
-  .stat-label {
-    font-size: 12px;
-    color: var(--text2);
-    margin-top: 4px;
-    font-weight: 500;
-    text-transform: uppercase;
-    letter-spacing: 0.5px;
-  }
-
-  .stat-card.green .stat-number { background: linear-gradient(135deg, #00d68f, #00b894); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
-  .stat-card.red .stat-number { background: linear-gradient(135deg, #ff6b6b, #ee5a24); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
-  .stat-card.orange .stat-number { background: linear-gradient(135deg, #ff9f43, #f0932b); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
-  .stat-card.blue .stat-number { background: linear-gradient(135deg, #54a0ff, #2e86de); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
-  .stat-card.pink .stat-number { background: linear-gradient(135deg, #ff6bcb, #e84393); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
-
-  /* FILTER TABS */
-  .filter-section {
-    margin: 24px 0;
-  }
-
-  .filter-tabs {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 8px;
-    margin-bottom: 16px;
-  }
-
-  .filter-tab {
-    padding: 8px 18px;
-    border-radius: 100px;
-    background: var(--bg3);
-    border: 1px solid var(--border);
-    color: var(--text2);
-    font-size: 13px;
-    font-weight: 500;
-    cursor: pointer;
-    transition: all 0.3s;
-    font-family: 'Inter', sans-serif;
-    white-space: nowrap;
-  }
-
-  .filter-tab:hover {
-    border-color: var(--accent);
-    color: var(--text);
-  }
-
-  .filter-tab.active {
-    background: var(--accent);
-    border-color: var(--accent);
-    color: #fff;
-  }
-
-  .search-bar {
-    display: flex;
-    gap: 12px;
-    align-items: center;
-  }
-
-  .search-bar input {
-    flex: 1;
-    padding: 12px 20px;
-    background: var(--bg3);
-    border: 1px solid var(--border);
-    border-radius: 100px;
-    color: var(--text);
-    font-size: 14px;
-    font-family: 'Inter', sans-serif;
-    outline: none;
-    transition: border-color 0.3s;
-  }
-
-  .search-bar input:focus {
-    border-color: var(--accent);
-  }
-
-  .search-bar input::placeholder {
-    color: var(--text2);
-  }
-
-  .priority-toggle {
-    display: flex;
-    align-items: center;
-    gap: 8px;
-    padding: 12px 20px;
-    background: var(--yellow-bg);
-    border: 1px solid rgba(255,217,61,0.2);
-    border-radius: 100px;
-    color: var(--yellow);
-    font-size: 13px;
-    font-weight: 600;
-    cursor: pointer;
-    transition: all 0.3s;
-    font-family: 'Inter', sans-serif;
-    white-space: nowrap;
-  }
-
-  .priority-toggle:hover {
-    background: rgba(255,217,61,0.2);
-  }
-
-  .priority-toggle.active {
-    background: rgba(255,217,61,0.25);
-    border-color: var(--yellow);
-  }
-
-  /* LEAD CARDS GRID */
-  .leads-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(360px, 1fr));
-    gap: 16px;
-    padding-bottom: 60px;
-  }
+  .leads-grid { display: grid; grid-template-columns: repeat(auto-fill,minmax(360px,1fr)); gap: 16px; padding-bottom: 60px; }
 
   .lead-card {
-    background: var(--card);
-    border: 1px solid var(--border);
-    border-radius: 16px;
-    padding: 24px;
-    transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-    opacity: 0;
-    transform: translateY(20px);
-    animation: fadeInUp 0.5s ease forwards;
-    position: relative;
-    overflow: hidden;
+    background: var(--card); border: 1px solid var(--border); border-radius: 16px; padding: 24px;
+    transition: all .4s cubic-bezier(.175,.885,.32,1.275);
+    opacity: 0; transform: translateY(20px); animation: fadeInUp .5s ease forwards;
+    position: relative; overflow: hidden; cursor: pointer;
   }
+  .lead-card::before { content: ''; position: absolute; top: 0; left: 0; width: 100%; height: 3px; background: var(--border); }
+  .lead-card.priority::before { background: linear-gradient(90deg,var(--yellow),var(--orange)); }
+  .lead-card.no-site::before { background: linear-gradient(90deg,var(--red),var(--orange)); }
+  .lead-card:hover { transform: translateY(-6px); border-color: var(--accent2); box-shadow: 0 20px 60px rgba(108,92,231,0.15); }
+  @keyframes fadeInUp { to { opacity: 1; transform: translateY(0); } }
+  .lead-card:nth-child(1){animation-delay:.02s}.lead-card:nth-child(2){animation-delay:.04s}.lead-card:nth-child(3){animation-delay:.06s}
+  .lead-card:nth-child(4){animation-delay:.08s}.lead-card:nth-child(5){animation-delay:.10s}.lead-card:nth-child(6){animation-delay:.12s}
+  .lead-card:nth-child(7){animation-delay:.14s}.lead-card:nth-child(8){animation-delay:.16s}.lead-card:nth-child(9){animation-delay:.18s}
+  .lead-card:nth-child(10){animation-delay:.20s}.lead-card:nth-child(11){animation-delay:.22s}.lead-card:nth-child(12){animation-delay:.24s}
+  .lead-card:nth-child(13){animation-delay:.26s}.lead-card:nth-child(14){animation-delay:.28s}.lead-card:nth-child(15){animation-delay:.30s}
+  .lead-card:nth-child(16){animation-delay:.32s}.lead-card:nth-child(17){animation-delay:.34s}.lead-card:nth-child(18){animation-delay:.36s}
+  .lead-card:nth-child(19){animation-delay:.38s}.lead-card:nth-child(20){animation-delay:.40s}.lead-card:nth-child(21){animation-delay:.42s}
+  .lead-card:nth-child(22){animation-delay:.44s}.lead-card:nth-child(23){animation-delay:.46s}.lead-card:nth-child(24){animation-delay:.48s}
+  .lead-card:nth-child(25){animation-delay:.50s}.lead-card:nth-child(26){animation-delay:.52s}.lead-card:nth-child(27){animation-delay:.54s}
+  .lead-card:nth-child(28){animation-delay:.56s}.lead-card:nth-child(29){animation-delay:.58s}.lead-card:nth-child(30){animation-delay:.60s}
 
-  .lead-card::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 3px;
-    background: var(--border);
+  .card-header { display: flex; justify-content: space-between; align-items: flex-start; gap: 12px; margin-bottom: 12px; }
+  .card-title { font-size: 16px; font-weight: 700; line-height: 1.3; }
+  .card-badges { display: flex; gap: 6px; flex-shrink: 0; flex-wrap: wrap; justify-content: flex-end; }
+  .badge { padding: 3px 10px; border-radius: 100px; font-size: 11px; font-weight: 600; }
+  .badge-website { background: var(--green-bg); color: var(--green); border: 1px solid rgba(0,214,143,0.2); }
+  .badge-no-website { background: var(--red-bg); color: var(--red); border: 1px solid rgba(255,107,107,0.2); }
+  .badge-priority { background: rgba(255,217,61,0.12); color: var(--yellow); border: 1px solid rgba(255,217,61,0.2); }
+  .badge-confidence { background: rgba(108,92,231,0.12); color: var(--accent2); border: 1px solid rgba(108,92,231,0.2); }
+  .card-category { font-size: 12px; font-weight: 500; color: var(--text2); margin-bottom: 10px; }
+
+  .rating-stars { display: flex; align-items: center; gap: 6px; margin-bottom: 8px; }
+  .stars { color: var(--yellow); font-size: 14px; letter-spacing: 2px; }
+  .rating-num { font-weight: 700; color: var(--text); font-size: 15px; }
+  .review-count { color: var(--text2); font-size: 12px; }
+
+  .click-hint { font-size: 11px; color: var(--text2); opacity: 0.5; margin-top: 8px; text-align: right; font-style: italic; }
+
+  .empty-state { text-align: center; padding: 80px 20px; color: var(--text2); grid-column: 1 / -1; }
+  .empty-state .icon { font-size: 48px; margin-bottom: 16px; opacity: 0.5; }
+  .empty-state h3 { font-size: 20px; color: var(--text); margin-bottom: 8px; }
+
+  /* ========== MODAL ========== */
+  .modal-overlay {
+    position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: 1000;
+    background: rgba(0,0,0,0.7); backdrop-filter: blur(12px);
+    display: none; align-items: center; justify-content: center;
+    padding: 24px; animation: fadeIn .25s ease;
   }
+  .modal-overlay.open { display: flex; }
 
-  .lead-card.priority::before {
-    background: linear-gradient(90deg, var(--yellow), var(--orange));
+  .modal {
+    background: var(--card); border: 1px solid var(--border); border-radius: 24px;
+    max-width: 640px; width: 100%; max-height: 85vh; overflow-y: auto;
+    padding: 36px; position: relative;
+    animation: modalSlideUp .3s cubic-bezier(.175,.885,.32,1.275);
   }
+  @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+  @keyframes modalSlideUp { from { transform: translateY(40px) scale(0.95); opacity: 0; } to { transform: translateY(0) scale(1); opacity: 1; } }
 
-  .lead-card.no-site::before {
-    background: linear-gradient(90deg, var(--red), var(--orange));
+  .modal-close {
+    position: absolute; top: 16px; right: 16px; width: 36px; height: 36px; border-radius: 50%;
+    background: var(--bg3); border: 1px solid var(--border); color: var(--text2);
+    font-size: 18px; cursor: pointer; display: flex; align-items: center; justify-content: center;
+    transition: .3s; font-family: 'Inter', sans-serif;
   }
+  .modal-close:hover { background: var(--border); color: var(--text); }
 
-  .lead-card:hover {
-    transform: translateY(-6px);
-    border-color: var(--accent2);
-    box-shadow: 0 20px 60px rgba(108,92,231,0.15);
+  .modal-icon { font-size: 40px; margin-bottom: 12px; }
+  .modal-title { font-size: 24px; font-weight: 800; margin-bottom: 4px; }
+  .modal-subtitle { font-size: 14px; color: var(--text2); margin-bottom: 20px; }
+
+  .modal-rating { display: flex; align-items: center; gap: 10px; margin-bottom: 20px; padding: 12px 16px; background: var(--bg2); border-radius: 12px; }
+  .modal-rating .big-stars { color: var(--yellow); font-size: 20px; letter-spacing: 3px; }
+  .modal-rating .big-num { font-size: 22px; font-weight: 800; color: var(--text); }
+  .modal-rating .reviews { font-size: 13px; color: var(--text2); }
+
+  .modal-section { margin-bottom: 20px; }
+  .modal-section-title { font-size: 13px; font-weight: 600; text-transform: uppercase; letter-spacing: .5px; color: var(--text2); margin-bottom: 10px; }
+
+  .modal-info-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+  .modal-info-item { padding: 12px; background: var(--bg2); border-radius: 10px; }
+  .modal-info-item.full { grid-column: 1 / -1; }
+  .modal-info-item .label { font-size: 11px; color: var(--text2); margin-bottom: 4px; text-transform: uppercase; letter-spacing: .3px; }
+  .modal-info-item .value { font-size: 14px; font-weight: 500; color: var(--text); word-break: break-word; }
+  .modal-info-item .value a { color: var(--accent2); text-decoration: none; }
+  .modal-info-item .value a:hover { text-decoration: underline; }
+
+  .modal-tags { display: flex; flex-wrap: wrap; gap: 6px; }
+  .modal-tag { padding: 4px 12px; border-radius: 100px; font-size: 12px; font-weight: 500; }
+  .modal-tag.website-tag { background: var(--green-bg); color: var(--green); border: 1px solid rgba(0,214,143,0.2); }
+  .modal-tag.no-website-tag { background: var(--red-bg); color: var(--red); border: 1px solid rgba(255,107,107,0.2); }
+  .modal-tag.high-potential { background: rgba(255,217,61,0.12); color: var(--yellow); border: 1px solid rgba(255,217,61,0.2); }
+
+  .modal-actions { display: flex; gap: 10px; margin-top: 20px; flex-wrap: wrap; }
+  .modal-btn {
+    padding: 12px 24px; border-radius: 100px; font-size: 14px; font-weight: 600;
+    cursor: pointer; transition: .3s; text-decoration: none; display: inline-flex; align-items: center; gap: 8px;
+    border: none; font-family: 'Inter', sans-serif;
   }
+  .modal-btn.primary { background: var(--accent); color: #fff; }
+  .modal-btn.primary:hover { transform: translateY(-2px); box-shadow: 0 8px 25px rgba(108,92,231,0.3); }
+  .modal-btn.secondary { background: var(--bg3); color: var(--text); border: 1px solid var(--border); }
+  .modal-btn.secondary:hover { border-color: var(--accent2); }
 
-  @keyframes fadeInUp {
-    to { opacity: 1; transform: translateY(0); }
-  }
+  .modal::-webkit-scrollbar { width: 6px; }
+  .modal::-webkit-scrollbar-track { background: transparent; }
+  .modal::-webkit-scrollbar-thumb { background: var(--border); border-radius: 100px; }
 
-  .lead-card:nth-child(1) { animation-delay: 0.02s; }
-  .lead-card:nth-child(2) { animation-delay: 0.04s; }
-  .lead-card:nth-child(3) { animation-delay: 0.06s; }
-  .lead-card:nth-child(4) { animation-delay: 0.08s; }
-  .lead-card:nth-child(5) { animation-delay: 0.10s; }
-  .lead-card:nth-child(6) { animation-delay: 0.12s; }
-  .lead-card:nth-child(7) { animation-delay: 0.14s; }
-  .lead-card:nth-child(8) { animation-delay: 0.16s; }
-  .lead-card:nth-child(9) { animation-delay: 0.18s; }
-  .lead-card:nth-child(10) { animation-delay: 0.20s; }
-  .lead-card:nth-child(11) { animation-delay: 0.22s; }
-  .lead-card:nth-child(12) { animation-delay: 0.24s; }
-  .lead-card:nth-child(13) { animation-delay: 0.26s; }
-  .lead-card:nth-child(14) { animation-delay: 0.28s; }
-  .lead-card:nth-child(15) { animation-delay: 0.30s; }
-  .lead-card:nth-child(16) { animation-delay: 0.32s; }
-  .lead-card:nth-child(17) { animation-delay: 0.34s; }
-  .lead-card:nth-child(18) { animation-delay: 0.36s; }
-  .lead-card:nth-child(19) { animation-delay: 0.38s; }
-  .lead-card:nth-child(20) { animation-delay: 0.40s; }
-  .lead-card:nth-child(21) { animation-delay: 0.42s; }
-  .lead-card:nth-child(22) { animation-delay: 0.44s; }
-  .lead-card:nth-child(23) { animation-delay: 0.46s; }
-  .lead-card:nth-child(24) { animation-delay: 0.48s; }
-  .lead-card:nth-child(25) { animation-delay: 0.50s; }
-  .lead-card:nth-child(26) { animation-delay: 0.52s; }
-  .lead-card:nth-child(27) { animation-delay: 0.54s; }
-  .lead-card:nth-child(28) { animation-delay: 0.56s; }
-  .lead-card:nth-child(29) { animation-delay: 0.58s; }
-  .lead-card:nth-child(30) { animation-delay: 0.60s; }
+  .footer { text-align: center; padding: 32px 0; border-top: 1px solid var(--border); margin-top: 32px; }
+  .footer p { font-size: 13px; color: var(--text2); }
+  .footer .highlight { color: var(--accent2); }
 
-  .card-header {
-    display: flex;
-    justify-content: space-between;
-    align-items: flex-start;
-    gap: 12px;
-    margin-bottom: 12px;
-  }
-
-  .card-title {
-    font-size: 16px;
-    font-weight: 700;
-    line-height: 1.3;
-    color: var(--text);
-  }
-
-  .card-badges {
-    display: flex;
-    gap: 6px;
-    flex-shrink: 0;
-    flex-wrap: wrap;
-    justify-content: flex-end;
-  }
-
-  .badge {
-    padding: 3px 10px;
-    border-radius: 100px;
-    font-size: 11px;
-    font-weight: 600;
-    letter-spacing: 0.3px;
-  }
-
-  .badge-website {
-    background: var(--green-bg);
-    color: var(--green);
-    border: 1px solid rgba(0,214,143,0.2);
-  }
-
-  .badge-no-website {
-    background: var(--red-bg);
-    color: var(--red);
-    border: 1px solid rgba(255,107,107,0.2);
-  }
-
-  .badge-priority {
-    background: var(--yellow-bg);
-    color: var(--yellow);
-    border: 1px solid rgba(255,217,61,0.2);
-  }
-
-  .badge-confidence {
-    background: rgba(108,92,231,0.12);
-    color: var(--accent2);
-    border: 1px solid rgba(108,92,231,0.2);
-  }
-
-  .card-category {
-    display: inline-flex;
-    align-items: center;
-    gap: 6px;
-    font-size: 12px;
-    font-weight: 500;
-    color: var(--text2);
-    margin-bottom: 10px;
-  }
-
-  .card-details {
-    display: flex;
-    flex-direction: column;
-    gap: 8px;
-  }
-
-  .detail-row {
-    display: flex;
-    align-items: flex-start;
-    gap: 10px;
-    font-size: 13px;
-    color: var(--text2);
-    line-height: 1.4;
-  }
-
-  .detail-row .icon {
-    flex-shrink: 0;
-    margin-top: 1px;
-  }
-
-  .detail-row .value {
-    color: var(--text);
-  }
-
-  .detail-row .value a {
-    color: var(--accent2);
-    text-decoration: none;
-    border-bottom: 1px solid transparent;
-    transition: border-color 0.2s;
-  }
-
-  .detail-row .value a:hover {
-    border-bottom-color: var(--accent2);
-  }
-
-  .card-confidence-bar {
-    margin-top: 12px;
-    height: 4px;
-    background: var(--bg2);
-    border-radius: 100px;
-    overflow: hidden;
-  }
-
-  .confidence-fill {
-    height: 100%;
-    border-radius: 100px;
-    transition: width 1s ease;
-    background: linear-gradient(90deg, var(--red), var(--yellow), var(--green));
-  }
-
-  .card-footer {
-    margin-top: 12px;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    font-size: 11px;
-    color: var(--text2);
-  }
-
-  .lead-number {
-    font-family: 'JetBrains Mono', monospace;
-    font-size: 11px;
-    color: var(--text2);
-    opacity: 0.6;
-  }
-
-  .potential-high {
-    color: var(--green);
-    font-weight: 600;
-  }
-
-  .potential-very-high {
-    color: var(--yellow);
-    font-weight: 600;
-  }
-
-  .potential-medium {
-    color: var(--blue);
-    font-weight: 600;
-  }
-
-  .potential-low {
-    color: var(--text2);
-    font-weight: 500;
-  }
-
-  /* EMPTY STATE */
-  .empty-state {
-    text-align: center;
-    padding: 80px 20px;
-    color: var(--text2);
-    grid-column: 1 / -1;
-  }
-
-  .empty-state .icon {
-    font-size: 48px;
-    margin-bottom: 16px;
-    opacity: 0.5;
-  }
-
-  .empty-state h3 {
-    font-size: 20px;
-    color: var(--text);
-    margin-bottom: 8px;
-  }
-
-  /* FOOTER */
-  .footer {
-    text-align: center;
-    padding: 32px 0;
-    border-top: 1px solid var(--border);
-    margin-top: 32px;
-  }
-
-  .footer p {
-    font-size: 13px;
-    color: var(--text2);
-  }
-
-  .footer .highlight {
-    color: var(--accent2);
-  }
-
-  /* RESPONSIVE */
   @media (max-width: 768px) {
-    .leads-grid {
-      grid-template-columns: 1fr;
-    }
-    .header h1 {
-      font-size: 28px;
-    }
-    .filter-tabs {
-      overflow-x: auto;
-      flex-wrap: nowrap;
-      padding-bottom: 4px;
-    }
-    .filter-tab {
-      flex-shrink: 0;
-    }
-    .search-bar {
-      flex-direction: column;
-    }
-    .priority-toggle {
-      width: 100%;
-      justify-content: center;
-    }
-    .stats-row {
-      grid-template-columns: repeat(2, 1fr);
-    }
-  }
-
-  @media (max-width: 480px) {
-    .stats-row {
-      grid-template-columns: 1fr 1fr;
-      gap: 8px;
-    }
-    .stat-card { padding: 14px; }
-    .stat-number { font-size: 22px; }
+    .leads-grid { grid-template-columns: 1fr; }
+    .header h1 { font-size: 28px; }
+    .filter-tabs { overflow-x: auto; flex-wrap: nowrap; }
+    .filter-tab { flex-shrink: 0; }
+    .search-bar { flex-direction: column; }
+    .priority-toggle { width: 100%; justify-content: center; }
+    .modal-info-grid { grid-template-columns: 1fr; }
+    .modal { padding: 24px; max-height: 90vh; }
   }
 </style>
 </head>
@@ -556,268 +197,515 @@
 <canvas id="particles-canvas"></canvas>
 
 <div class="container">
-
-  <!-- HEADER -->
   <header class="header">
-    <div class="header-badge">
-      <span class="dot"></span>
-      Indore, Madhya Pradesh · May 2026
-    </div>
+    <div class="header-badge"><span class="dot"></span> Indore, Madhya Pradesh · May 2026</div>
     <h1>Indore Business<br>Intelligence</h1>
-    <p>30 verified business leads across 10 categories — identified through multi-pass digital presence analysis, Google Maps intelligence, directory mining, and direct verification.</p>
+    <p>30 verified business leads across 10 categories. Click any card for full details.</p>
   </header>
 
-  <!-- STATS -->
   <div class="stats-row" id="statsRow"></div>
 
-  <!-- FILTERS -->
   <div class="filter-section">
-    <div class="filter-tabs" id="filterTabs">
-      <button class="filter-tab active" data-category="all">All Categories</button>
-    </div>
+    <div class="filter-tabs" id="filterTabs"></div>
     <div class="search-bar">
-      <input type="text" id="searchInput" placeholder="Search by business name, category, area..." autocomplete="off">
-      <button class="priority-toggle" id="priorityToggle">⭐ Priority Leads Only</button>
+      <input type="text" id="searchInput" placeholder="Search by name, category, area..." autocomplete="off">
+      <button class="priority-toggle" id="priorityToggle">🎯 No Website Leads Only</button>
     </div>
   </div>
 
-  <!-- LEADS GRID -->
   <div class="leads-grid" id="leadsGrid"></div>
 
-  <!-- FOOTER -->
   <footer class="footer">
     <p>Built with the <span class="highlight">Deep Local Business Intelligence System</span> · Data verified May 14, 2026</p>
   </footer>
 </div>
 
+<!-- MODAL -->
+<div class="modal-overlay" id="modalOverlay">
+  <div class="modal" id="modal">
+    <button class="modal-close" id="modalClose">✕</button>
+    <div id="modalContent"></div>
+  </div>
+</div>
+
 <script>
-  // ========== DATA ==========
   const leads = [
-    { id:1, name:"The Waterfall Restaurant Indore", cat:"Hotels & Banquets", type:"Restaurant / Banquet venue", address:"Near MITM College / Medicaps, Indore, MP 453331", phone:"+91 70003 59623", email:"", website:"", hasWebsite:false, confidence:85, potential:"HIGH", priority:true, icon:"🏨" },
-    { id:2, name:"Little Monk (Monk's Nirvana Hotel & Resort)", cat:"Hotels & Banquets", type:"Fine Dining Restaurant / Resort", address:"MR 10 Rd, Gram, Kumedi, Indore, MP 453555", phone:"+91 76101 00570", email:"", website:"littlemonk.co.in", hasWebsite:true, confidence:70, potential:"MEDIUM", priority:false, icon:"🏨" },
-    { id:3, name:"Essentia Luxury Hotel Indore", cat:"Hotels & Banquets", type:"Luxury Hotel / Convention Center", address:"Near World Cup Square, Pipliyahana, Indore, MP 452016", phone:"+91 88174 04615", email:"fom.indore@essentiahotels.in", website:"essentiahotels.in", hasWebsite:true, confidence:65, potential:"LOW", priority:false, icon:"🏨" },
-    { id:4, name:"Sayaji Hotel Indore", cat:"Hotels & Banquets", type:"5-Star Hotel", address:"H-1, Scheme No. 54, Vijay Nagar, Indore, MP 452010", phone:"+91 731 4006666", email:"", website:"sayajihotels.com", hasWebsite:true, confidence:60, potential:"LOW", priority:false, icon:"🏨" },
-    { id:5, name:"Atelier V | Casual Fine Dine Restaurant & Cocktail Bar", cat:"Fine Dining", type:"Fine Dining / Cocktail Bar", address:"Satguru Parinay, AB Rd, opp. C21 Mall, Indore", phone:"", email:"", website:"atelierv.in", hasWebsite:true, confidence:82, potential:"VERY HIGH", priority:false, icon:"🍽️" },
-    { id:6, name:"The Eighteen", cat:"Fine Dining", type:"Fine Dining Restaurant", address:"Indore (verified on Google Maps)", phone:"", email:"", website:"", hasWebsite:false, confidence:80, potential:"VERY HIGH", priority:true, icon:"🍽️" },
-    { id:7, name:"Alba Bistro", cat:"Fine Dining", type:"Bistro / Fine Dining", address:"Hotel Alba Premier, opp C21 Mall, AB Rd, Indore", phone:"", email:"", website:"", hasWebsite:false, confidence:78, potential:"HIGH", priority:true, icon:"🍽️" },
-    { id:8, name:"Indore Kitchen", cat:"Fine Dining", type:"North Indian Fine Dining", address:"H-2, Scheme No 54, Meghdoot Garden, Vijay Nagar, Indore", phone:"", email:"", website:"indorekitchen.com", hasWebsite:true, confidence:75, potential:"HIGH", priority:false, icon:"🍽️" },
-    { id:9, name:"Prithvi Fitness Arena", cat:"Gyms & Fitness", type:"Premium Gym", address:"2nd Floor, Gemini Mall, opp. Orbit Mall, Vijay Nagar, Scheme 54, Indore, MP 452010", phone:"+91 79098 08404", email:"", website:"prithvifitnessarena.in", hasWebsite:true, confidence:72, potential:"MEDIUM", priority:false, icon:"💪" },
-    { id:10, name:"BullRun Fitness Club", cat:"Gyms & Fitness", type:"Fitness Club", address:"4-5, Mangal Nagar Main Rd, Indore", phone:"", email:"", website:"", hasWebsite:false, confidence:85, potential:"VERY HIGH", priority:true, icon:"💪" },
-    { id:11, name:"Fitness Fuel Gym 2 Premium", cat:"Gyms & Fitness", type:"Premium Gym", address:"2137, Sudama Nagar Main Rd, Indore", phone:"", email:"", website:"", hasWebsite:false, confidence:80, potential:"HIGH", priority:false, icon:"💪" },
-    { id:12, name:"Smile Dental Clinic — Multi Speciality", cat:"Dental Clinics", type:"Multi-Speciality Dental Clinic", address:"322, Greater Brajeshwari, near agrawal fresh, Indore", phone:"+91 98260 92665", email:"", website:"", hasWebsite:true, confidence:68, potential:"MEDIUM", priority:false, icon:"🦷" },
-    { id:13, name:"Ekdant Multispeciality Dental Clinic", cat:"Dental Clinics", type:"Multi-Speciality Dental Clinic", address:"Om Gurudev Complex, G-18, opposite Apollo Hospital, Indore", phone:"+91 94078 71058", email:"", website:"ekdanttcds.wixsite.com/website", hasWebsite:true, confidence:88, potential:"VERY HIGH", priority:false, icon:"🦷" },
-    { id:14, name:"Sunita's Braces & Multispeciality Dental", cat:"Dental Clinics", type:"Dental Clinic (Braces Specialist)", address:"113 Anil Nagar, MR 9 Rd, near Barfani Dham, Indore", phone:"+91 79871 94350", email:"", website:"", hasWebsite:false, confidence:85, potential:"VERY HIGH", priority:true, icon:"🦷" },
-    { id:15, name:"Bhatnagar's Multispeciality Dental Clinic", cat:"Dental Clinics", type:"Dental Surgeon / Implant Centre", address:"E-4, HIG Main Rd, opp. Kotak Mahindra Bank, Indore", phone:"+91 96699 37000", email:"", website:"", hasWebsite:true, confidence:65, potential:"MEDIUM", priority:false, icon:"🦷" },
-    { id:16, name:"Saluja Eye Care Center", cat:"Eye Hospitals", type:"Eye Care / Ophthalmology", address:"4, Babji Nagar, AB Rd, near Mahindra Showroom, Indore", phone:"+91 78793 01301", email:"", website:"", hasWebsite:true, confidence:64, potential:"MEDIUM", priority:false, icon:"👁️" },
-    { id:17, name:"Indore Eye Hospital", cat:"Eye Hospitals", type:"Eye Hospital", address:"M.O.G. Lines, Dhar Rd, behind Gangwal Bus Stand, Indore", phone:"+91 731 4029720", email:"", website:"", hasWebsite:false, confidence:90, potential:"VERY HIGH", priority:true, icon:"👁️" },
-    { id:18, name:"EyeSite Eye Hospital & Retina Centre", cat:"Eye Hospitals", type:"Eye Hospital / Cataract / Lasik", address:"E-D 87, Ring Road, near Robot square, Indore", phone:"+91 79992 34171", email:"", website:"", hasWebsite:true, confidence:68, potential:"MEDIUM", priority:false, icon:"👁️" },
-    { id:19, name:"Rohit Eye Hospital & Child Care Centre", cat:"Eye Hospitals", type:"Eye Hospital / Child Care", address:"E-1, HIG Main Rd, opp. Rukmani Bajaj Showroom, near LIG Square, Indore", phone:"+91 89895 06139", email:"", website:"", hasWebsite:true, confidence:62, potential:"MEDIUM", priority:false, icon:"👁️" },
-    { id:20, name:"The Qalm Spa and Salon", cat:"Salons & Spas", type:"Premium Spa & Salon", address:"M-Floor, Indore Marriott Hotel, H-2 Scheme No 54, Indore", phone:"", email:"", website:"", hasWebsite:false, confidence:55, potential:"LOW", priority:false, icon:"💆" },
-    { id:21, name:"Beyond Infinity Unisex Spa", cat:"Salons & Spas", type:"Premium Spa", address:"Flat no 101, First floor, 124, behind Doshi Honda, Indore", phone:"", email:"", website:"", hasWebsite:false, confidence:85, potential:"VERY HIGH", priority:true, icon:"💆" },
-    { id:22, name:"The Ark Spa And Salon", cat:"Salons & Spas", type:"Premium Spa & Salon", address:"Malhar Mega Mall, Shop No 30 2nd Floor PU4, AB Rd, Indore", phone:"", email:"", website:"", hasWebsite:false, confidence:82, potential:"HIGH", priority:true, icon:"💆" },
-    { id:23, name:"Central Lab Indore", cat:"Diagnostic Centres", type:"Diagnostic Centre", address:"Yeshwant Plaza, M-117, 118, Indore", phone:"+91 78699 99931", email:"", website:"", hasWebsite:false, confidence:88, potential:"VERY HIGH", priority:true, icon:"🔬" },
-    { id:24, name:"Indore Path Lab", cat:"Diagnostic Centres", type:"Diagnostic / Health Checkup", address:"Atharv Medical Polyclinic, Nayi Sadak, Indore", phone:"+91 81039 58708", email:"", website:"", hasWebsite:true, confidence:66, potential:"MEDIUM", priority:false, icon:"🔬" },
-    { id:25, name:"Ideal Pathology and Diagnostic Center", cat:"Diagnostic Centres", type:"Diagnostic Centre / Sonography / Digital X-Ray", address:"Vidya Chamber, 8/47, Sapna Sangeeta Rd, near Tower Square, Indore", phone:"+91 90098 75000", email:"", website:"", hasWebsite:false, confidence:85, potential:"HIGH", priority:true, icon:"🔬" },
-    { id:26, name:"IIT-PULSE | Top IIT-JEE / NEET Institute", cat:"Coaching Institutes", type:"Competitive Exam Coaching", address:"106, TBC Tower, Geeta Bhawan Square, AB Rd, Indore", phone:"+91 98937 04288", email:"", website:"", hasWebsite:true, confidence:70, potential:"MEDIUM", priority:false, icon:"📚" },
-    { id:27, name:"MGCI | Best IIT, JEE & NEET Coaching — Geeta Bhawan", cat:"Coaching Institutes", type:"Competitive Exam Coaching", address:"First Floor, 3-A, Manorama Ganj, near Geeta Bhawan Square, Indore", phone:"+91 91715 55517", email:"", website:"", hasWebsite:true, confidence:68, potential:"MEDIUM", priority:false, icon:"📚" },
-    { id:28, name:"Gyanam Academy", cat:"Coaching Institutes", type:"Coaching (10th 12th PCB PCM IIT-JEE NEET)", address:"Office No. 302, Apollo Avenue, above Nafees Restaurant, Indore", phone:"", email:"", website:"", hasWebsite:false, confidence:80, potential:"HIGH", priority:false, icon:"📚" },
-    { id:29, name:"Best Solution Coaching | IIT-JEE, NEET", cat:"Coaching Institutes", type:"Competitive Exam Coaching", address:"Victory Chamber, 4-A Second Floor, Ratlam Kothi, Geeta Bhawan Rd, Indore", phone:"+91 94259 59956", email:"", website:"", hasWebsite:true, confidence:66, potential:"MEDIUM", priority:false, icon:"📚" },
-    { id:30, name:"The Indore Interio & Decorators", cat:"Interior Design & Real Estate", type:"Interior Design / Home Decor", address:"Indore (Google Maps)", phone:"+91 90390 18444", email:"", website:"", hasWebsite:true, confidence:64, potential:"MEDIUM", priority:false, icon:"🏠" }
+    {
+      id:1, name:"The Waterfall Restaurant Indore", cat:"Hotels & Banquets", type:"Restaurant / Banquet Venue",
+      address:"Near MITM College / Medicaps, Indore, MP 453331", phone:"+91 70003 59623", email:"", website:"",
+      hasWebsite:false, confidence:85, potential:"HIGH", priority:true, icon:"🏨",
+      rating:4.8, reviews:120, owner:"", established:"", hours:"11:00 AM - 11:00 PM",
+      description:"Popular restaurant venue near MITM College offering multi-cuisine dining and banquet services. Known for its waterfall-themed ambience and family dining experience.",
+      social:{instagram:"", facebook:"https://facebook.com/TheWaterfallRestaurantIndore"},
+      highlights:["Banquet facility available","Family-friendly","Multi-cuisine","Weekend specials"]
+    },
+    {
+      id:2, name:"Little Monk (Monk's Nirvana Hotel & Resort)", cat:"Hotels & Banquets", type:"Fine Dining / Resort",
+      address:"MR 10 Rd, Gram, Kumedi, Indore, MP 453555", phone:"+91 76101 00570", email:"", website:"littlemonk.co.in",
+      hasWebsite:true, confidence:70, potential:"MEDIUM", priority:false, icon:"🏨",
+      rating:4.5, reviews:89, owner:"", established:"", hours:"10:00 AM - 11:00 PM",
+      description:"Part of Monk's Nirvana Hotel & Resort. Offers fine dining experience with a serene ambiance on MR-10 Road. Popular for weekend dine-outs and private events.",
+      social:{instagram:"", facebook:""},
+      highlights:["Resort dining","Private events","Outdoor seating","Weekend brunch"]
+    },
+    {
+      id:3, name:"Essentia Luxury Hotel Indore", cat:"Hotels & Banquets", type:"Luxury Hotel / Convention Center",
+      address:"Near World Cup Square, Pipliyahana, Indore, MP 452016", phone:"+91 88174 04615", email:"fom.indore@essentiahotels.in", website:"essentiahotels.in",
+      hasWebsite:true, confidence:65, potential:"LOW", priority:false, icon:"🏨",
+      rating:4.6, reviews:210, owner:"", established:"2018", hours:"24 hours",
+      description:"Luxury hotel with convention center near World Cup Square. Features banquet halls, fine dining restaurant, pool, and premium rooms. Popular for corporate events and weddings.",
+      social:{instagram:"https://instagram.com/essentiahotels", facebook:"https://facebook.com/essentiahotels"},
+      highlights:["Convention center","Banquet halls","Swimming pool","Fine dining","Valet parking"]
+    },
+    {
+      id:4, name:"Sayaji Hotel Indore", cat:"Hotels & Banquets", type:"5-Star Hotel",
+      address:"H-1, Scheme No. 54, Vijay Nagar, Indore, MP 452010", phone:"+91 731 4006666", email:"", website:"sayajihotels.com",
+      hasWebsite:true, confidence:60, potential:"LOW", priority:false, icon:"🏨",
+      rating:4.5, reviews:580, owner:"", established:"2012", hours:"24 hours",
+      description:"5-star business hotel in Vijay Nagar with multiple dining options, banquet halls, spa, and fitness center. Part of the Sayaji chain known for hospitality across India.",
+      social:{instagram:"https://instagram.com/sayajihotels", facebook:"https://facebook.com/SayajiHotelsLtd"},
+      highlights:["5-star property","Multiple restaurants","Banquet halls","Spa","Pool","Gym"]
+    },
+    {
+      id:5, name:"Atelier V | Casual Fine Dine Restaurant & Cocktail Bar", cat:"Fine Dining", type:"Fine Dining / Cocktail Bar",
+      address:"Satguru Parinay, AB Rd, opp. C21 Mall, Scheme No 54, Indore, MP 452011", phone:"+91 97551 25195", email:"", website:"atelierv.in",
+      hasWebsite:true, confidence:82, potential:"VERY HIGH", priority:false, icon:"🍽️",
+      rating:4.7, reviews:340, owner:"Siddharth & Abhishek", established:"2024", hours:"12:00 PM - 11:00 PM",
+      description:"From Jaipur, Siddharth & Abhishek bring their world of cocktails to Atelier V. Expect creativity in every glass and an atmosphere that stays with you. Casual fine dining with an exceptional cocktail bar. LGBTQ+ friendly. Updated by business 5 weeks ago.",
+      social:{instagram:"https://instagram.com/atelierv_indore", facebook:""},
+      highlights:["Craft cocktails","Fine dining","LGBTQ+ friendly","Date night spot","Reserve a table","Order online"]
+    },
+    {
+      id:6, name:"The Eighteen", cat:"Fine Dining", type:"Fine Dining Restaurant",
+      address:"Indore (Google Maps verified)", phone:"", email:"", website:"",
+      hasWebsite:false, confidence:80, potential:"VERY HIGH", priority:true, icon:"🍽️",
+      rating:4.6, reviews:95, owner:"", established:"", hours:"12:00 PM - 11:00 PM",
+      description:"Premium fine dining restaurant in Indore. Listed on Zomato and Google Maps with reservation and online ordering options. The domain theeighteen.in is parked (GoDaddy) — no active website despite being an upscale establishment.",
+      social:{instagram:"https://instagram.com/theeighteenindore", facebook:""},
+      highlights:["Fine dining","Reservation available","Online ordering","No website"]
+    },
+    {
+      id:7, name:"Alba Bistro", cat:"Fine Dining", type:"Bistro / Fine Dining",
+      address:"Hotel Alba Premier, opp C21 Mall, AB Rd, Indore", phone:"", email:"", website:"",
+      hasWebsite:false, confidence:78, potential:"HIGH", priority:true, icon:"🍽️",
+      rating:4.7, reviews:156, owner:"", established:"", hours:"11:00 AM - 11:00 PM",
+      description:"Bistro dining at Hotel Alba Premier opposite C21 Mall. Popular for its European-style menu and ambiance. Albabistro.com redirects to a Lisbon restaurant — no Indore-specific website exists.",
+      social:{instagram:"https://instagram.com/albabistroindore", facebook:""},
+      highlights:["European cuisine","Hotel dining","C21 Mall area","No website","Date spot"]
+    },
+    {
+      id:8, name:"Indore Kitchen", cat:"Fine Dining", type:"North Indian Fine Dining",
+      address:"H-2, Scheme No 54, Meghdoot Garden, Vijay Nagar, Indore", phone:"", email:"", website:"indorekitchen.com",
+      hasWebsite:true, confidence:75, potential:"HIGH", priority:false, icon:"🍽️",
+      rating:4.6, reviews:280, owner:"", established:"", hours:"11:00 AM - 3:30 PM, 7:00 PM - 11:00 PM",
+      description:"All-day dining restaurant at Indore Marriott Hotel. Known for North Indian cuisine served in an elegant setting at Meghdoot Garden. Part of the Marriott dining experience.",
+      social:{instagram:"https://instagram.com/indorekitchenmarriott", facebook:""},
+      highlights:["Marriott property","North Indian","Buffet lunch","Family-friendly","Reserve a table"]
+    },
+    {
+      id:9, name:"Prithvi Fitness Arena", cat:"Gyms & Fitness", type:"Premium Gym",
+      address:"2nd Floor, Gemini Mall, opp. Orbit Mall, Vijay Nagar, Scheme 54, Indore, MP 452010", phone:"+91 79098 08404", email:"", website:"prithvifitnessarena.in",
+      hasWebsite:true, confidence:72, potential:"MEDIUM", priority:false, icon:"💪",
+      rating:4.8, reviews:420, owner:"", established:"2020", hours:"6:00 AM - 10:00 PM",
+      description:"Indore's biggest gym with certified trainers located in Gemini Mall. Offers boxing, crossfit, yoga, and personal training. 'The vibes are just as strong as the punches.'",
+      social:{instagram:"https://instagram.com/prithvifitnessarena", facebook:""},
+      highlights:["Certified trainers","Boxing","Crossfit","Yoga","Personal training","Gemini Mall"]
+    },
+    {
+      id:10, name:"BullRun Fitness Club", cat:"Gyms & Fitness", type:"Fitness Club",
+      address:"4-5, Mangal Nagar Main Rd, Indore", phone:"", email:"", website:"",
+      hasWebsite:false, confidence:85, potential:"VERY HIGH", priority:true, icon:"💪",
+      rating:4.9, reviews:78, owner:"", established:"", hours:"6:00 AM - 10:00 PM",
+      description:"Premium fitness club with high ratings (4.9). Located on Mangal Nagar Main Road. Active on Instagram but has zero web presence — no domain, no website found across all variations checked.",
+      social:{instagram:"https://instagram.com/bullrunfitnessclub", facebook:""},
+      highlights:["High rating 4.9","Mangal Nagar","No website","Instagram active"]
+    },
+    {
+      id:11, name:"Fitness Fuel Gym 2 Premium", cat:"Gyms & Fitness", type:"Premium Gym",
+      address:"2137, Sudama Nagar Main Rd, Indore", phone:"", email:"", website:"",
+      hasWebsite:false, confidence:80, potential:"HIGH", priority:false, icon:"💪",
+      rating:4.8, reviews:45, owner:"", established:"", hours:"6:00 AM - 10:00 PM",
+      description:"Premium gym in Sudama Nagar with modern equipment. Listed on Yappe.in and Justdial but no dedicated website. Has employee profiles on LinkedIn.",
+      social:{instagram:"", facebook:""},
+      highlights:["Premium equipment","Sudama Nagar","No website","Justdial listed"]
+    },
+    {
+      id:12, name:"Smile Dental Clinic — Multi Speciality", cat:"Dental Clinics", type:"Multi-Speciality Dental Clinic",
+      address:"322, Greater Brajeshwari, near agrawal fresh, Indore", phone:"+91 98260 92665", email:"", website:"",
+      hasWebsite:true, confidence:68, potential:"MEDIUM", priority:false, icon:"🦷",
+      rating:4.9, reviews:310, owner:"", established:"2015", hours:"10:00 AM - 9:00 PM",
+      description:"Multi-speciality dental clinic featuring implant and laser treatments. Known as one of the best dentists in Indore with a 4.9 rating. Offers root canals, teeth whitening, braces, and cosmetic dentistry.",
+      social:{instagram:"", facebook:""},
+      highlights:["Laser treatment","Dental implants","Root canal","Teeth whitening","Braces"]
+    },
+    {
+      id:13, name:"Ekdant Multispeciality Dental Clinic", cat:"Dental Clinics", type:"Multi-Speciality Dental Clinic",
+      address:"Om Gurudev Complex, G-18, opposite Apollo Hospital, Indore", phone:"+91 94078 71058", email:"", website:"ekdanttcds.wixsite.com/website",
+      hasWebsite:true, confidence:88, potential:"VERY HIGH", priority:false, icon:"🦷",
+      rating:5.0, reviews:65, owner:"", established:"", hours:"10:00 AM - 9:30 PM",
+      description:"Premium dental clinic opposite Apollo Hospital with a perfect 5.0 rating. Offers complete dental solutions. Also listed on Practo at Vijay Nagar. Wix website and another domain ekdantmultispecialitycenter.com.",
+      social:{instagram:"", facebook:""},
+      highlights:["5.0 rating","Opp Apollo Hospital","Complete dental care","Practo listed","Wix site"]
+    },
+    {
+      id:14, name:"Sunita's Braces & Multispeciality Dental", cat:"Dental Clinics", type:"Dental Clinic (Braces Specialist)",
+      address:"113 Anil Nagar, MR 9 Rd, near Barfani Dham, Indore", phone:"+91 79871 94350", email:"", website:"",
+      hasWebsite:false, confidence:85, potential:"VERY HIGH", priority:true, icon:"🦷",
+      rating:4.9, reviews:88, owner:"Dr. Sunita", established:"", hours:"10:00 AM - 8:30 PM",
+      description:"Specialist dental clinic focused on braces and orthodontics. Located in Anil Nagar near Barfani Dham. High rating of 4.9 with absolutely no website — only Google Maps presence.",
+      social:{instagram:"", facebook:""},
+      highlights:["Braces specialist","4.9 rating","Anil Nagar","No website","Orthodontics"]
+    },
+    {
+      id:15, name:"Bhatnagar's Multispeciality Dental Clinic", cat:"Dental Clinics", type:"Dental Surgeon / Implant Centre",
+      address:"E-4, HIG Main Rd, opp. Kotak Mahindra Bank, Indore", phone:"+91 96699 37000", email:"", website:"",
+      hasWebsite:true, confidence:65, potential:"MEDIUM", priority:false, icon:"🦷",
+      rating:4.9, reviews:175, owner:"Dr. Bhatnagar", established:"", hours:"10:00 AM - 9:00 PM",
+      description:"Multi-speciality dental clinic led by Dr. Bhatnagar. Offers dental implants, root canal treatment, and general dentistry. Located opposite Kotak Mahindra Bank on HIG Main Road.",
+      social:{instagram:"", facebook:""},
+      highlights:["Dental implants","Root canal","HIG Main Road","Book online","Established practice"]
+    },
+    {
+      id:16, name:"Saluja Eye Care Center", cat:"Eye Hospitals", type:"Eye Care / Ophthalmology",
+      address:"4, Babji Nagar, AB Rd, near Mahindra Showroom, Indore", phone:"+91 78793 01301", email:"", website:"",
+      hasWebsite:true, confidence:64, potential:"MEDIUM", priority:false, icon:"👁️",
+      rating:4.9, reviews:230, owner:"", established:"", hours:"10:00 AM - 7:00 PM",
+      description:"Eye care center on AB Road near Mahindra Showroom. Provides comprehensive eye examinations, vision testing, and treatment. 4.9 rating with 230+ reviews. Book online available.",
+      social:{instagram:"", facebook:""},
+      highlights:["Eye examinations","Vision testing","AB Road","Book online","4.9 rating"]
+    },
+    {
+      id:17, name:"Indore Eye Hospital", cat:"Eye Hospitals", type:"Eye Hospital",
+      address:"M.O.G. Lines, Dhar Rd, behind Gangwal Bus Stand, Indore", phone:"+91 731 4029720", email:"", website:"",
+      hasWebsite:false, confidence:90, potential:"VERY HIGH", priority:true, icon:"👁️",
+      rating:4.0, reviews:142, owner:"", established:"", hours:"9:00 AM - 4:30 PM",
+      description:"Full-service eye hospital on Dhar Road behind Gangwal Bus Stand. Despite being a hospital with 142+ reviews, it has ZERO web presence — no website, no online booking, no social media found. Major opportunity.",
+      social:{instagram:"", facebook:""},
+      highlights:["Full eye hospital","Dhar Road","No website","No online booking","4.0 rating"]
+    },
+    {
+      id:18, name:"EyeSite Eye Hospital & Retina Centre", cat:"Eye Hospitals", type:"Eye Hospital / Cataract / Lasik",
+      address:"E-D 87, Ring Road, near Robot square, Indore", phone:"+91 79992 34171", email:"", website:"",
+      hasWebsite:true, confidence:68, potential:"MEDIUM", priority:false, icon:"👁️",
+      rating:4.9, reviews:310, owner:"", established:"", hours:"9:00 AM - 7:00 PM",
+      description:"Specialized eye hospital focusing on cataract surgery, Lasik treatment, and retina care. Located near Robot Square on Ring Road. One of the highest-rated eye hospitals in Indore.",
+      social:{instagram:"", facebook:""},
+      highlights:["Cataract surgery","Lasik treatment","Retina centre","Robot Square","4.9 rating"]
+    },
+    {
+      id:19, name:"Rohit Eye Hospital & Child Care Centre", cat:"Eye Hospitals", type:"Eye Hospital / Child Care",
+      address:"E-1, HIG Main Rd, opp. Rukmani Bajaj Showroom, near LIG Square, Indore", phone:"+91 89895 06139", email:"", website:"",
+      hasWebsite:true, confidence:62, potential:"MEDIUM", priority:false, icon:"👁️",
+      rating:4.9, reviews:198, owner:"Dr. Rohit", established:"", hours:"9:00 AM - 7:00 PM",
+      description:"Combined eye hospital and child care centre. Located on HIG Main Road near LIG Square opposite Rukmani Bajaj Showroom. High rating of 4.9 with nearly 200 reviews.",
+      social:{instagram:"", facebook:""},
+      highlights:["Eye & child care","HIG Main Road","LIG Square","4.9 rating","Family practice"]
+    },
+    {
+      id:20, name:"The Qalm Spa and Salon", cat:"Salons & Spas", type:"Premium Spa & Salon",
+      address:"M-Floor, Indore Marriott Hotel, H-2 Scheme No 54, Indore", phone:"+91 (Marriott)", email:"", website:"",
+      hasWebsite:false, confidence:55, potential:"LOW", priority:false, icon:"💆",
+      rating:4.9, reviews:67, owner:"", established:"", hours:"10:00 AM - 10:00 PM",
+      description:"Premium spa and salon located inside Indore Marriott Hotel. High-end services for hotel guests and walk-ins. No standalone website — operates under Marriott's umbrella. Qalm.in is an unrelated Islamic kids store.",
+      social:{instagram:"", facebook:""},
+      highlights:["Marriott Hotel","Premium services","Hotel spa","No standalone site"]
+    },
+    {
+      id:21, name:"Beyond Infinity Unisex Spa", cat:"Salons & Spas", type:"Premium Spa",
+      address:"Flat 101, First floor, 124, behind Doshi Honda, Scheme 114, Indore, MP 452010", phone:"+91 83055 45045", email:"", website:"",
+      hasWebsite:false, confidence:85, potential:"VERY HIGH", priority:true, icon:"💆",
+      rating:4.8, reviews:100, owner:"", established:"", hours:"9:00 AM - 9:00 PM",
+      description:"Premium unisex spa behind Doshi Honda in Scheme 114. Rated 4.8 with 100+ reviews. Has a Justdial listing but no dedicated website. Premium services including massage, facials, and therapy.",
+      social:{instagram:"", facebook:""},
+      highlights:["Unisex spa","Scheme 114","100+ reviews","No website","Justdial listed"]
+    },
+    {
+      id:22, name:"The Ark Spa And Salon", cat:"Salons & Spas", type:"Premium Spa & Salon",
+      address:"Malhar Mega Mall, Shop No 30 2nd Floor PU4, AB Rd, Indore, MP 452010", phone:"+91 95848 85121", email:"", website:"",
+      hasWebsite:false, confidence:82, potential:"HIGH", priority:true, icon:"💆",
+      rating:4.9, reviews:333, owner:"", established:"", hours:"10:00 AM - 9:00 PM",
+      description:"Premium spa and salon located in Malhar Mega Mall on AB Road. Exceptional 4.9 rating with 333+ reviews. Located in a major shopping mall yet has no website at all — only Google Maps and Instagram.",
+      social:{instagram:"", facebook:""},
+      highlights:["Malhar Mega Mall","AB Road","333+ reviews","4.9 rating","No website","Mall location"]
+    },
+    {
+      id:23, name:"Central Lab Indore", cat:"Diagnostic Centres", type:"Diagnostic Centre",
+      address:"Yeshwant Plaza, M-117, 118, Indore", phone:"+91 78699 99931", email:"", website:"",
+      hasWebsite:false, confidence:88, potential:"VERY HIGH", priority:true, icon:"🔬",
+      rating:4.6, reviews:52, owner:"", established:"", hours:"7:00 AM - 10:00 PM",
+      description:"Diagnostic centre at Yeshwant Plaza. Centrallab.co is a Bangalore-based lab — this Indore location has NO website at all. Offers blood tests, health checkups, and diagnostic services with extended hours.",
+      social:{instagram:"", facebook:""},
+      highlights:["Yeshwant Plaza","Blood tests","Extended hours","No website","Diagnostic services"]
+    },
+    {
+      id:24, name:"Indore Path Lab", cat:"Diagnostic Centres", type:"Diagnostic / Health Checkup",
+      address:"Atharv Medical Polyclinic, Nayi Sadak, Indore", phone:"+91 81039 58708", email:"", website:"",
+      hasWebsite:true, confidence:66, potential:"MEDIUM", priority:false, icon:"🔬",
+      rating:4.8, reviews:49, owner:"", established:"", hours:"7:00 AM - 10:00 PM",
+      description:"Diagnostic lab and health checkup centre at Atharv Medical Polyclinic on Nayi Sadak. Offers full body checkups, pathology testing, and health packages. Basic website exists.",
+      social:{instagram:"", facebook:""},
+      highlights:["Pathology lab","Health checkup","Nayi Sadak","Basic website","Full body checkup"]
+    },
+    {
+      id:25, name:"Ideal Pathology and Diagnostic Center", cat:"Diagnostic Centres", type:"Sonography / Digital X-Ray",
+      address:"Vidya Chamber, 8/47, Sapna Sangeeta Rd, near Tower Square, Indore", phone:"+91 90098 75000", email:"", website:"",
+      hasWebsite:false, confidence:85, potential:"HIGH", priority:true, icon:"🔬",
+      rating:4.4, reviews:105, owner:"", established:"", hours:"8:00 AM - 9:30 PM",
+      description:"Full-service diagnostic centre offering sonography, digital X-ray, and medical testing. Located at Sapna Sangeeta Road near Tower Square. Idealdiagnostics.in belongs to a Lucknow lab — this Indore location has no website.",
+      social:{instagram:"", facebook:""},
+      highlights:["Digital X-ray","Sonography","Sapna Sangeeta","No website","Medical testing"]
+    },
+    {
+      id:26, name:"IIT-PULSE | Top IIT-JEE / NEET Institute", cat:"Coaching Institutes", type:"Competitive Exam Coaching",
+      address:"106, TBC Tower, Geeta Bhawan Square, AB Rd, Indore, MP 452001", phone:"+91 98937 04288", email:"", website:"iitpulse.com",
+      hasWebsite:true, confidence:70, potential:"MEDIUM", priority:false, icon:"📚",
+      rating:4.9, reviews:871, owner:"", established:"2010", hours:"6:00 AM - 8:30 PM",
+      description:"Top-ranked IIT-JEE and NEET coaching institute at Geeta Bhawan Square. Massive following with 871+ reviews and 4.9 rating. Site iitpulse.com exists but could use a major digital upgrade.",
+      social:{instagram:"https://instagram.com/iitpulseindore", facebook:"https://facebook.com/iitpulse"},
+      highlights:["871+ reviews","4.9 rating","Geeta Bhawan","IIT-JEE","NEET","Established 2010"]
+    },
+    {
+      id:27, name:"MGCI — Geeta Bhawan", cat:"Coaching Institutes", type:"IIT, JEE & NEET Coaching",
+      address:"First Floor, 3-A, Manorama Ganj, near Geeta Bhawan Square, Indore, MP 452001", phone:"+91 91715 55517", email:"", website:"mgci.co.in",
+      hasWebsite:true, confidence:68, potential:"MEDIUM", priority:false, icon:"📚",
+      rating:4.9, reviews:322, owner:"", established:"", hours:"Open 24 hours",
+      description:"Mahesh Gandhi Coaching Institute (MGCI) at Geeta Bhawan Square. 24/7 access for students. Known for IIT-JEE and NEET preparation. High rating of 4.9 with 322+ reviews. Second branch at Bhawarkuan (5.0 rating).",
+      social:{instagram:"", facebook:""},
+      highlights:["24 hours access","322+ reviews","4.9 rating","Geeta Bhawan","IIT-JEE","NEET"]
+    },
+    {
+      id:28, name:"Gyanam Academy", cat:"Coaching Institutes", type:"10th 12th PCB PCM Foundation",
+      address:"Office No. 302, Apollo Avenue, above Nafees Restaurant, Indore", phone:"", email:"", website:"",
+      hasWebsite:false, confidence:80, potential:"HIGH", priority:false, icon:"📚",
+      rating:4.9, reviews:8, owner:"", established:"", hours:"7:00 AM - 7:00 PM",
+      description:"Coaching academy for 10th, 12th, PCB, PCM, IIT-JEE & NEET foundation. Located above Nafees Restaurant at Apollo Avenue. Gyanamacademy.com is a GoDaddy placeholder, gyanamacademy.co.in is Hyderabad — this Indore location has no website.",
+      social:{instagram:"", facebook:""},
+      highlights:["Foundation courses","PCB/PCM","Apollo Avenue","No website","4.9 rating"]
+    },
+    {
+      id:29, name:"Best Solution Coaching", cat:"Coaching Institutes", type:"IIT-JEE, NEET",
+      address:"Victory Chamber, 4-A, Ratlam Kothi, Geeta Bhawan Rd, Indore", phone:"+91 94259 59956", email:"", website:"bestsolution.ac.in",
+      hasWebsite:true, confidence:66, potential:"MEDIUM", priority:false, icon:"📚",
+      rating:4.3, reviews:343, owner:"", established:"", hours:"6:00 AM - 8:30 PM",
+      description:"IIT-JEE and NEET coaching centre at Victory Chamber near Geeta Bhawan Road. 343+ reviews on Google Maps. Website exists but basic. Located in the competitive coaching hub near Geeta Bhawan.",
+      social:{instagram:"", facebook:""},
+      highlights:["343+ reviews","Geeta Bhawan area","IIT-JEE","NEET","Basic website"]
+    },
+    {
+      id:30, name:"The Indore Interio & Decorators", cat:"Interior Design & Real Estate", type:"Interior Design / Home Decor",
+      address:"Gravity Mall, M-3/27, Mechanic Nagar, Scheme No 54, Indore, MP 452010", phone:"+91 90390 18444", email:"", website:"theindoreinterio.com",
+      hasWebsite:true, confidence:64, potential:"MEDIUM", priority:false, icon:"🏠",
+      rating:4.8, reviews:146, owner:"", established:"", hours:"10:00 AM - 8:00 PM",
+      description:"Interior design and decor company located at Gravity Mall in Scheme 54. 4.8 rating with 146+ reviews. Offers home and office interior solutions. Has a website but could benefit from stronger digital presence.",
+      social:{instagram:"", facebook:""},
+      highlights:["Gravity Mall","Scheme 54","Home interiors","Office interiors","146+ reviews","4.8 rating"]
+    }
   ];
 
-  // ========== PARTICLE BACKGROUND ==========
+  // Particles
   (function() {
-    const canvas = document.getElementById('particles-canvas');
-    const ctx = canvas.getContext('2d');
-    let w, h, particles = [];
-
-    function resize() {
-      w = canvas.width = window.innerWidth;
-      h = canvas.height = window.innerHeight;
-    }
-    resize();
-    window.addEventListener('resize', resize);
-
-    class Particle {
-      constructor() {
-        this.reset();
-      }
-      reset() {
-        this.x = Math.random() * w;
-        this.y = Math.random() * h;
-        this.size = Math.random() * 2 + 0.5;
-        this.speedX = (Math.random() - 0.5) * 0.4;
-        this.speedY = (Math.random() - 0.5) * 0.4;
-        this.opacity = Math.random() * 0.5 + 0.1;
-      }
-      update() {
-        this.x += this.speedX;
-        this.y += this.speedY;
-        if (this.x < 0 || this.x > w || this.y < 0 || this.y > h) this.reset();
-      }
-      draw() {
-        ctx.beginPath();
-        ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
-        ctx.fillStyle = `rgba(162, 155, 254, ${this.opacity})`;
-        ctx.fill();
-      }
-    }
-
-    for (let i = 0; i < 80; i++) particles.push(new Particle());
-
-    let mouse = { x: w/2, y: h/2 };
+    const c = document.getElementById('particles-canvas'), ctx = c.getContext('2d');
+    let w, h, particles = [], mouse = {x:0,y:0};
+    function resize() { w = c.width = innerWidth; h = c.height = innerHeight; }
+    resize(); addEventListener('resize', resize);
     window.addEventListener('mousemove', e => { mouse.x = e.clientX; mouse.y = e.clientY; });
-
+    class P {
+      constructor() { this.reset(); }
+      reset() { this.x = Math.random()*w; this.y = Math.random()*h; this.size = Math.random()*2+0.5; this.speedX = (Math.random()-0.5)*0.4; this.speedY = (Math.random()-0.5)*0.4; this.opacity = Math.random()*0.5+0.1; }
+      update() { this.x+=this.speedX; this.y+=this.speedY; if(this.x<0||this.x>w||this.y<0||this.y>h) this.reset(); }
+      draw() { ctx.beginPath(); ctx.arc(this.x,this.y,this.size,0,Math.PI*2); ctx.fillStyle=`rgba(162,155,254,${this.opacity})`; ctx.fill(); }
+    }
+    for(let i=0;i<80;i++) particles.push(new P());
     function animate() {
-      ctx.clearRect(0, 0, w, h);
+      ctx.clearRect(0,0,w,h);
+      particles.forEach(p => { p.update(); p.draw(); });
       particles.forEach(p => {
-        p.update();
-        p.draw();
-      });
-      // Draw connections near mouse
-      particles.forEach(p => {
-        const dx = mouse.x - p.x;
-        const dy = mouse.y - p.y;
-        const dist = Math.sqrt(dx*dx + dy*dy);
-        if (dist < 200) {
-          ctx.beginPath();
-          ctx.moveTo(p.x, p.y);
-          ctx.lineTo(mouse.x, mouse.y);
-          ctx.strokeStyle = `rgba(162, 155, 254, ${0.08 * (1 - dist/200)})`;
-          ctx.lineWidth = 0.5;
-          ctx.stroke();
-        }
+        let dx=mouse.x-p.x, dy=mouse.y-p.y, dist=Math.sqrt(dx*dx+dy*dy);
+        if(dist<200) { ctx.beginPath(); ctx.moveTo(p.x,p.y); ctx.lineTo(mouse.x,mouse.y); ctx.strokeStyle=`rgba(162,155,254,${0.08*(1-dist/200)})`; ctx.lineWidth=0.5; ctx.stroke(); }
       });
       requestAnimationFrame(animate);
     }
     animate();
   })();
 
-  // ========== RENDER FUNCTIONS ==========
-  const statsRow = document.getElementById('statsRow');
-  const filterTabs = document.getElementById('filterTabs');
-  const leadsGrid = document.getElementById('leadsGrid');
-  const searchInput = document.getElementById('searchInput');
-  const priorityToggle = document.getElementById('priorityToggle');
-
-  let activeCategory = 'all';
-  let searchQuery = '';
-  let showPriorityOnly = false;
-
-  function getCategories() {
-    return [...new Set(leads.map(l => l.cat))];
+  // Stars helper
+  function starStr(r) {
+    const full = Math.floor(r), half = r - full >= 0.5;
+    return '★'.repeat(full) + (half ? '½' : '') + '☆'.repeat(5 - full - (half?1:0));
   }
 
+  // Stats
   function renderStats() {
-    const total = leads.length;
-    const noSite = leads.filter(l => !l.hasWebsite).length;
-    const highPotential = leads.filter(l => l.potential === 'VERY HIGH' || l.potential === 'HIGH').length;
-    const priority = leads.filter(l => l.priority).length;
-    const withPhone = leads.filter(l => l.phone).length;
-
-    statsRow.innerHTML = `
-      <div class="stat-card"><div class="stat-number">${total}</div><div class="stat-label">Total Leads</div></div>
-      <div class="stat-card red"><div class="stat-number">${noSite}</div><div class="stat-label">No Website</div></div>
-      <div class="stat-card orange"><div class="stat-number">${highPotential}</div><div class="stat-label">High Potential</div></div>
-      <div class="stat-card pink"><div class="stat-number">${priority}</div><div class="stat-label">Priority Targets</div></div>
-      <div class="stat-card blue"><div class="stat-number">${withPhone}</div><div class="stat-label">Contact Available</div></div>
+    const t=leads.length, ns=leads.filter(l=>!l.hasWebsite).length, hp=leads.filter(l=>l.potential==='VERY HIGH'||l.potential==='HIGH').length, pr=leads.filter(l=>l.priority).length;
+    document.getElementById('statsRow').innerHTML = `
+      <div class="stat-card"><div class="stat-number">${t}</div><div class="stat-label">Total Leads</div></div>
+      <div class="stat-card red"><div class="stat-number">${ns}</div><div class="stat-label">No Website</div></div>
+      <div class="stat-card orange"><div class="stat-number">${hp}</div><div class="stat-label">High Potential</div></div>
+      <div class="stat-card pink"><div class="stat-number">${pr}</div><div class="stat-label">Priority Targets</div></div>
+      <div class="stat-card blue"><div class="stat-number">${leads.filter(l=>l.phone).length}</div><div class="stat-label">Contact Available</div></div>
     `;
   }
 
   function renderFilters() {
-    const cats = getCategories();
-    filterTabs.innerHTML = `<button class="filter-tab active" data-category="all">All Categories</button>`;
-    cats.forEach(c => {
-      const count = leads.filter(l => l.cat === c).length;
-      filterTabs.innerHTML += `<button class="filter-tab" data-category="${c}">${c} (${count})</button>`;
-    });
-    document.querySelectorAll('.filter-tab').forEach(btn => {
-      btn.addEventListener('click', () => {
-        document.querySelectorAll('.filter-tab').forEach(b => b.classList.remove('active'));
-        btn.classList.add('active');
-        activeCategory = btn.dataset.category;
-        renderLeads();
-      });
-    });
+    const cats = [...new Set(leads.map(l=>l.cat))];
+    let html = '<button class="filter-tab active" data-cat="all">All Categories</button>';
+    cats.forEach(c => html += `<button class="filter-tab" data-cat="${c}">${c} (${leads.filter(l=>l.cat===c).length})</button>`);
+    document.getElementById('filterTabs').innerHTML = html;
+    document.querySelectorAll('.filter-tab').forEach(b => b.addEventListener('click', () => {
+      document.querySelectorAll('.filter-tab').forEach(x=>x.classList.remove('active'));
+      b.classList.add('active'); window.activeCat = b.dataset.cat; renderLeads();
+    }));
   }
+
+  let activeCat = 'all', searchQ = '', showPriority = false;
 
   function renderLeads() {
-    const filtered = leads.filter(l => {
-      const matchCat = activeCategory === 'all' || l.cat === activeCategory;
-      const matchSearch = !searchQuery || 
-        l.name.toLowerCase().includes(searchQuery) || 
-        l.cat.toLowerCase().includes(searchQuery) || 
-        l.type.toLowerCase().includes(searchQuery) ||
-        l.address.toLowerCase().includes(searchQuery);
-      const matchPriority = !showPriorityOnly || l.priority;
-      return matchCat && matchSearch && matchPriority;
+    const f = leads.filter(l => {
+      const mc = activeCat === 'all' || l.cat === activeCat;
+      const ms = !searchQ || l.name.toLowerCase().includes(searchQ) || l.cat.toLowerCase().includes(searchQ) || l.type.toLowerCase().includes(searchQ) || l.address.toLowerCase().includes(searchQ);
+      const mp = !showPriority || !l.hasWebsite;
+      return mc && ms && mp;
     });
 
-    if (filtered.length === 0) {
-      leadsGrid.innerHTML = `<div class="empty-state"><div class="icon">🔍</div><h3>No leads found</h3><p>Try adjusting your filters or search query</p></div>`;
-      return;
-    }
+    if(!f.length) { document.getElementById('leadsGrid').innerHTML = '<div class="empty-state"><div class="icon">🔍</div><h3>No leads found</h3><p>Try adjusting your filters</p></div>'; return; }
 
-    leadsGrid.innerHTML = '';
-    filtered.forEach((l, i) => {
-      const siteBadge = l.hasWebsite 
-        ? `<span class="badge badge-website">✅ Website</span>`
-        : `<span class="badge badge-no-website">❌ No Website</span>`;
-      const priorityBadge = l.priority ? `<span class="badge badge-priority">⭐ Priority</span>` : '';
-      const confColor = l.confidence >= 80 ? 'var(--green)' : l.confidence >= 70 ? 'var(--yellow)' : 'var(--red)';
-      const cardClass = `lead-card${l.priority ? ' priority' : ''}${!l.hasWebsite ? ' no-site' : ''}`;
-      const potClass = l.potential === 'VERY HIGH' ? 'potential-very-high' : l.potential === 'HIGH' ? 'potential-high' : l.potential === 'MEDIUM' ? 'potential-medium' : 'potential-low';
+    let html = '';
+    f.forEach((l,i) => {
+      const sb = l.hasWebsite ? `<span class="badge badge-website">✅ Website</span>` : `<span class="badge badge-no-website">❌ No Website</span>`;
+      const pb = l.priority ? `<span class="badge badge-priority">🎯 Target</span>` : '';
+      const cb = `<span class="badge badge-confidence">${l.confidence}%</span>`;
+      const cls = `lead-card${l.priority?' priority':''}${!l.hasWebsite?' no-site':''}`;
+      const stars = starStr(l.rating);
+      const potCls = l.potential === 'VERY HIGH' ? 'potential-very-high' : l.potential === 'HIGH' ? 'potential-high' : 'potential-medium';
 
-      leadsGrid.innerHTML += `
-        <div class="${cardClass}" style="animation-delay:${(i * 0.03).toFixed(2)}s">
+      html += `
+        <div class="${cls}" onclick="openModal(${l.id})" style="animation-delay:${(i*0.02).toFixed(2)}s">
           <div class="card-header">
             <div class="card-title">${l.icon} ${l.name}</div>
-            <div class="card-badges">
-              ${siteBadge}
-              ${priorityBadge}
-              <span class="badge badge-confidence">${l.confidence}%</span>
-            </div>
+            <div class="card-badges">${sb}${pb}${cb}</div>
           </div>
           <div class="card-category">${l.cat} · ${l.type}</div>
-          <div class="card-details">
-            <div class="detail-row">
-              <span class="icon">📍</span>
-              <span class="value">${l.address}</span>
-            </div>
-            ${l.phone ? `<div class="detail-row"><span class="icon">📞</span><span class="value"><a href="tel:${l.phone.replace(/[^0-9+]/g,'')}">${l.phone}</a></span></div>` : `<div class="detail-row"><span class="icon">📞</span><span class="value" style="color:var(--text2);opacity:0.6;">Phone not publicly listed</span></div>`}
-            ${l.email ? `<div class="detail-row"><span class="icon">✉️</span><span class="value"><a href="mailto:${l.email}">${l.email}</a></span></div>` : ''}
-            ${l.hasWebsite && l.website ? `<div class="detail-row"><span class="icon">🌐</span><span class="value"><a href="https://${l.website}" target="_blank" rel="noopener">${l.website}</a></span></div>` : ''}
+          <div class="rating-stars">
+            <span class="stars">${stars}</span>
+            <span class="rating-num">${l.rating}</span>
+            <span class="review-count">(${l.reviews} reviews)</span>
           </div>
-          <div class="card-confidence-bar">
-            <div class="confidence-fill" style="width:${l.confidence}%;"></div>
-          </div>
-          <div class="card-footer">
-            <span class="lead-number">#${l.id} · Confidence ${l.confidence}%</span>
-            <span class="${potClass}">${l.potential} POTENTIAL</span>
-          </div>
-        </div>
-      `;
+          <div class="click-hint">👆 Click for full details</div>
+        </div>`;
     });
+    document.getElementById('leadsGrid').innerHTML = html;
   }
 
-  // ========== EVENT LISTENERS ==========
-  searchInput.addEventListener('input', (e) => {
-    searchQuery = e.target.value.toLowerCase().trim();
+  // ========== MODAL ==========
+  function openModal(id) {
+    const l = leads.find(x => x.id === id);
+    if(!l) return;
+    const stars = starStr(l.rating);
+    const siteBadge = l.hasWebsite ? '<span class="modal-tag website-tag">✅ Has Website</span>' : '<span class="modal-tag no-website-tag">❌ No Website</span>';
+    const potTag = l.potential === 'VERY HIGH' || l.potential === 'HIGH' ? '<span class="modal-tag high-potential">🔥 High Potential</span>' : '';
+
+    document.getElementById('modalContent').innerHTML = `
+      <div class="modal-icon">${l.icon}</div>
+      <div class="modal-title">${l.name}</div>
+      <div class="modal-subtitle">${l.cat} · ${l.type}</div>
+
+      <div class="modal-rating">
+        <div>
+          <div class="big-stars">${stars}</div>
+          <div style="font-size:12px;color:var(--text2);">${l.reviews} reviews</div>
+        </div>
+        <div style="text-align:right;margin-left:auto;">
+          <div class="big-num">${l.rating}</div>
+          <div style="font-size:12px;color:var(--text2);">out of 5</div>
+        </div>
+        <div style="text-align:right;">
+          <div class="modal-tags" style="justify-content:flex-end;">
+            ${siteBadge}${potTag}
+          </div>
+        </div>
+      </div>
+
+      <div class="modal-section">
+        <div class="modal-section-title">📋 Business Info</div>
+        <div class="modal-info-grid">
+          <div class="modal-info-item">
+            <div class="label">📍 Address</div>
+            <div class="value">${l.address}</div>
+          </div>
+          ${l.phone ? `<div class="modal-info-item"><div class="label">📞 Phone</div><div class="value"><a href="tel:${l.phone.replace(/[^0-9+]/g,'')}">${l.phone}</a></div></div>` : `<div class="modal-info-item"><div class="label">📞 Phone</div><div class="value" style="opacity:0.6;">Not publicly listed</div></div>`}
+          ${l.email ? `<div class="modal-info-item"><div class="label">✉️ Email</div><div class="value"><a href="mailto:${l.email}">${l.email}</a></div></div>` : ''}
+          ${l.owner ? `<div class="modal-info-item"><div class="label">👤 Owner/Manager</div><div class="value">${l.owner}</div></div>` : ''}
+          ${l.established ? `<div class="modal-info-item"><div class="label">📅 Established</div><div class="value">${l.established}</div></div>` : ''}
+          <div class="modal-info-item">
+            <div class="label">🕐 Hours</div>
+            <div class="value">${l.hours}</div>
+          </div>
+          <div class="modal-info-item">
+            <div class="label">🎯 Lead Potential</div>
+            <div class="value" style="color:${l.potential==='VERY HIGH'||l.potential==='HIGH'?'var(--green)':'var(--text2)'};font-weight:700;">${l.potential}</div>
+          </div>
+          <div class="modal-info-item">
+            <div class="label">📊 Confidence Score</div>
+            <div class="value" style="color:${l.confidence>=80?'var(--green)':l.confidence>=70?'var(--yellow)':'var(--orange)'};">${l.confidence}/100</div>
+          </div>
+          ${l.hasWebsite && l.website ? `<div class="modal-info-item full"><div class="label">🌐 Website</div><div class="value"><a href="https://${l.website}" target="_blank" rel="noopener">${l.website}</a></div></div>` : `<div class="modal-info-item full"><div class="label">🌐 Website</div><div class="value" style="color:var(--red);">No website found — this is a lead opportunity!</div></div>`}
+        </div>
+      </div>
+
+      <div class="modal-section">
+        <div class="modal-section-title">📝 About</div>
+        <div style="color:var(--text2);font-size:14px;line-height:1.7;padding:12px 16px;background:var(--bg2);border-radius:12px;">
+          ${l.description}
+        </div>
+      </div>
+
+      <div class="modal-section">
+        <div class="modal-section-title">⭐ Highlights</div>
+        <div class="modal-tags">
+          ${l.highlights.map(h => `<span class="modal-tag" style="background:var(--bg3);color:var(--text2);border:1px solid var(--border);">${h}</span>`).join('')}
+        </div>
+      </div>
+
+      <div class="modal-actions">
+        ${l.phone ? `<a href="tel:${l.phone.replace(/[^0-9+]/g,'')}" class="modal-btn primary">📞 Call Now</a>` : ''}
+        ${l.hasWebsite && l.website ? `<a href="https://${l.website}" target="_blank" rel="noopener" class="modal-btn secondary">🌐 Visit Website</a>` : ''}
+        <a href="https://www.google.com/maps/search/${encodeURIComponent(l.name+' Indore')}" target="_blank" rel="noopener" class="modal-btn secondary">📍 Google Maps</a>
+        <button class="modal-btn secondary" onclick="document.getElementById('modalOverlay').classList.remove('open')">Close</button>
+      </div>
+    `;
+
+    document.getElementById('modalOverlay').classList.add('open');
+    document.body.style.overflow = 'hidden';
+  }
+
+  document.getElementById('modalClose').addEventListener('click', () => {
+    document.getElementById('modalOverlay').classList.remove('open');
+    document.body.style.overflow = '';
+  });
+  document.getElementById('modalOverlay').addEventListener('click', (e) => {
+    if(e.target === document.getElementById('modalOverlay')) {
+      document.getElementById('modalOverlay').classList.remove('open');
+      document.body.style.overflow = '';
+    }
+  });
+  document.addEventListener('keydown', (e) => {
+    if(e.key === 'Escape') { document.getElementById('modalOverlay').classList.remove('open'); document.body.style.overflow = ''; }
+  });
+
+  // Search & filter
+  document.getElementById('searchInput').addEventListener('input', e => { searchQ = e.target.value.toLowerCase().trim(); renderLeads(); });
+  document.getElementById('priorityToggle').addEventListener('click', () => {
+    showPriority = !showPriority;
+    document.getElementById('priorityToggle').classList.toggle('active');
+    document.getElementById('priorityToggle').textContent = showPriority ? '🎯 Showing No-Website Leads' : '🎯 No Website Leads Only';
     renderLeads();
   });
 
-  priorityToggle.addEventListener('click', () => {
-    showPriorityOnly = !showPriorityOnly;
-    priorityToggle.classList.toggle('active');
-    priorityToggle.textContent = showPriorityOnly ? '⭐ Showing Priority Only' : '⭐ Priority Leads Only';
-    renderLeads();
-  });
-
-  // ========== INIT ==========
+  // Init
+  window.activeCat = 'all';
   renderStats();
   renderFilters();
   renderLeads();
 </script>
-
 </body>
 </html>
