@@ -1,0 +1,823 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Indore Business Intelligence — 30 Verified Leads</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500&display=swap');
+
+  *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+  :root {
+    --bg: #0a0a0f;
+    --bg2: #111118;
+    --bg3: #1a1a25;
+    --card: #16161f;
+    --card2: #1e1e2d;
+    --border: #2a2a3d;
+    --text: #e8e8f0;
+    --text2: #8888aa;
+    --accent: #6c5ce7;
+    --accent2: #a29bfe;
+    --green: #00d68f;
+    --green-bg: rgba(0,214,143,0.12);
+    --red: #ff6b6b;
+    --red-bg: rgba(255,107,107,0.12);
+    --yellow: #ffd93d;
+    --yellow-bg: rgba(255,217,61,0.12);
+    --orange: #ff9f43;
+    --blue: #54a0ff;
+    --pink: #ff6bcb;
+    --gradient: linear-gradient(135deg, #6c5ce7, #a29bfe);
+  }
+
+  body {
+    font-family: 'Inter', -apple-system, sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    min-height: 100vh;
+    overflow-x: hidden;
+  }
+
+  /* ANIMATED BACKGROUND */
+  #particles-canvas {
+    position: fixed;
+    top: 0; left: 0; width: 100%; height: 100%;
+    z-index: 0;
+    pointer-events: none;
+  }
+
+  .container {
+    position: relative;
+    z-index: 1;
+    max-width: 1280px;
+    margin: 0 auto;
+    padding: 0 24px;
+  }
+
+  /* HEADER */
+  .header {
+    padding: 48px 0 32px;
+    text-align: center;
+    position: relative;
+  }
+
+  .header-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 6px 16px;
+    background: var(--bg3);
+    border: 1px solid var(--border);
+    border-radius: 100px;
+    font-size: 12px;
+    font-weight: 500;
+    color: var(--text2);
+    margin-bottom: 20px;
+    letter-spacing: 0.5px;
+  }
+
+  .header-badge .dot {
+    width: 6px; height: 6px;
+    border-radius: 50%;
+    background: var(--green);
+    animation: pulse-dot 2s ease-in-out infinite;
+  }
+
+  @keyframes pulse-dot {
+    0%, 100% { opacity: 1; transform: scale(1); }
+    50% { opacity: 0.5; transform: scale(0.8); }
+  }
+
+  .header h1 {
+    font-size: clamp(32px, 5vw, 56px);
+    font-weight: 900;
+    background: linear-gradient(135deg, #fff 0%, #a29bfe 50%, #6c5ce7 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    line-height: 1.15;
+    margin-bottom: 12px;
+  }
+
+  .header p {
+    color: var(--text2);
+    font-size: 16px;
+    max-width: 600px;
+    margin: 0 auto;
+    line-height: 1.6;
+  }
+
+  /* STATS ROW */
+  .stats-row {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+    gap: 12px;
+    margin: 32px 0;
+  }
+
+  .stat-card {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 20px;
+    text-align: center;
+    transition: transform 0.3s, border-color 0.3s;
+  }
+
+  .stat-card:hover {
+    transform: translateY(-4px);
+    border-color: var(--accent);
+  }
+
+  .stat-number {
+    font-size: 28px;
+    font-weight: 800;
+    background: var(--gradient);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+
+  .stat-label {
+    font-size: 12px;
+    color: var(--text2);
+    margin-top: 4px;
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+  }
+
+  .stat-card.green .stat-number { background: linear-gradient(135deg, #00d68f, #00b894); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+  .stat-card.red .stat-number { background: linear-gradient(135deg, #ff6b6b, #ee5a24); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+  .stat-card.orange .stat-number { background: linear-gradient(135deg, #ff9f43, #f0932b); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+  .stat-card.blue .stat-number { background: linear-gradient(135deg, #54a0ff, #2e86de); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+  .stat-card.pink .stat-number { background: linear-gradient(135deg, #ff6bcb, #e84393); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+
+  /* FILTER TABS */
+  .filter-section {
+    margin: 24px 0;
+  }
+
+  .filter-tabs {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-bottom: 16px;
+  }
+
+  .filter-tab {
+    padding: 8px 18px;
+    border-radius: 100px;
+    background: var(--bg3);
+    border: 1px solid var(--border);
+    color: var(--text2);
+    font-size: 13px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.3s;
+    font-family: 'Inter', sans-serif;
+    white-space: nowrap;
+  }
+
+  .filter-tab:hover {
+    border-color: var(--accent);
+    color: var(--text);
+  }
+
+  .filter-tab.active {
+    background: var(--accent);
+    border-color: var(--accent);
+    color: #fff;
+  }
+
+  .search-bar {
+    display: flex;
+    gap: 12px;
+    align-items: center;
+  }
+
+  .search-bar input {
+    flex: 1;
+    padding: 12px 20px;
+    background: var(--bg3);
+    border: 1px solid var(--border);
+    border-radius: 100px;
+    color: var(--text);
+    font-size: 14px;
+    font-family: 'Inter', sans-serif;
+    outline: none;
+    transition: border-color 0.3s;
+  }
+
+  .search-bar input:focus {
+    border-color: var(--accent);
+  }
+
+  .search-bar input::placeholder {
+    color: var(--text2);
+  }
+
+  .priority-toggle {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 12px 20px;
+    background: var(--yellow-bg);
+    border: 1px solid rgba(255,217,61,0.2);
+    border-radius: 100px;
+    color: var(--yellow);
+    font-size: 13px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s;
+    font-family: 'Inter', sans-serif;
+    white-space: nowrap;
+  }
+
+  .priority-toggle:hover {
+    background: rgba(255,217,61,0.2);
+  }
+
+  .priority-toggle.active {
+    background: rgba(255,217,61,0.25);
+    border-color: var(--yellow);
+  }
+
+  /* LEAD CARDS GRID */
+  .leads-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(360px, 1fr));
+    gap: 16px;
+    padding-bottom: 60px;
+  }
+
+  .lead-card {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    padding: 24px;
+    transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    opacity: 0;
+    transform: translateY(20px);
+    animation: fadeInUp 0.5s ease forwards;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .lead-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 3px;
+    background: var(--border);
+  }
+
+  .lead-card.priority::before {
+    background: linear-gradient(90deg, var(--yellow), var(--orange));
+  }
+
+  .lead-card.no-site::before {
+    background: linear-gradient(90deg, var(--red), var(--orange));
+  }
+
+  .lead-card:hover {
+    transform: translateY(-6px);
+    border-color: var(--accent2);
+    box-shadow: 0 20px 60px rgba(108,92,231,0.15);
+  }
+
+  @keyframes fadeInUp {
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  .lead-card:nth-child(1) { animation-delay: 0.02s; }
+  .lead-card:nth-child(2) { animation-delay: 0.04s; }
+  .lead-card:nth-child(3) { animation-delay: 0.06s; }
+  .lead-card:nth-child(4) { animation-delay: 0.08s; }
+  .lead-card:nth-child(5) { animation-delay: 0.10s; }
+  .lead-card:nth-child(6) { animation-delay: 0.12s; }
+  .lead-card:nth-child(7) { animation-delay: 0.14s; }
+  .lead-card:nth-child(8) { animation-delay: 0.16s; }
+  .lead-card:nth-child(9) { animation-delay: 0.18s; }
+  .lead-card:nth-child(10) { animation-delay: 0.20s; }
+  .lead-card:nth-child(11) { animation-delay: 0.22s; }
+  .lead-card:nth-child(12) { animation-delay: 0.24s; }
+  .lead-card:nth-child(13) { animation-delay: 0.26s; }
+  .lead-card:nth-child(14) { animation-delay: 0.28s; }
+  .lead-card:nth-child(15) { animation-delay: 0.30s; }
+  .lead-card:nth-child(16) { animation-delay: 0.32s; }
+  .lead-card:nth-child(17) { animation-delay: 0.34s; }
+  .lead-card:nth-child(18) { animation-delay: 0.36s; }
+  .lead-card:nth-child(19) { animation-delay: 0.38s; }
+  .lead-card:nth-child(20) { animation-delay: 0.40s; }
+  .lead-card:nth-child(21) { animation-delay: 0.42s; }
+  .lead-card:nth-child(22) { animation-delay: 0.44s; }
+  .lead-card:nth-child(23) { animation-delay: 0.46s; }
+  .lead-card:nth-child(24) { animation-delay: 0.48s; }
+  .lead-card:nth-child(25) { animation-delay: 0.50s; }
+  .lead-card:nth-child(26) { animation-delay: 0.52s; }
+  .lead-card:nth-child(27) { animation-delay: 0.54s; }
+  .lead-card:nth-child(28) { animation-delay: 0.56s; }
+  .lead-card:nth-child(29) { animation-delay: 0.58s; }
+  .lead-card:nth-child(30) { animation-delay: 0.60s; }
+
+  .card-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: 12px;
+    margin-bottom: 12px;
+  }
+
+  .card-title {
+    font-size: 16px;
+    font-weight: 700;
+    line-height: 1.3;
+    color: var(--text);
+  }
+
+  .card-badges {
+    display: flex;
+    gap: 6px;
+    flex-shrink: 0;
+    flex-wrap: wrap;
+    justify-content: flex-end;
+  }
+
+  .badge {
+    padding: 3px 10px;
+    border-radius: 100px;
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 0.3px;
+  }
+
+  .badge-website {
+    background: var(--green-bg);
+    color: var(--green);
+    border: 1px solid rgba(0,214,143,0.2);
+  }
+
+  .badge-no-website {
+    background: var(--red-bg);
+    color: var(--red);
+    border: 1px solid rgba(255,107,107,0.2);
+  }
+
+  .badge-priority {
+    background: var(--yellow-bg);
+    color: var(--yellow);
+    border: 1px solid rgba(255,217,61,0.2);
+  }
+
+  .badge-confidence {
+    background: rgba(108,92,231,0.12);
+    color: var(--accent2);
+    border: 1px solid rgba(108,92,231,0.2);
+  }
+
+  .card-category {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 12px;
+    font-weight: 500;
+    color: var(--text2);
+    margin-bottom: 10px;
+  }
+
+  .card-details {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+
+  .detail-row {
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+    font-size: 13px;
+    color: var(--text2);
+    line-height: 1.4;
+  }
+
+  .detail-row .icon {
+    flex-shrink: 0;
+    margin-top: 1px;
+  }
+
+  .detail-row .value {
+    color: var(--text);
+  }
+
+  .detail-row .value a {
+    color: var(--accent2);
+    text-decoration: none;
+    border-bottom: 1px solid transparent;
+    transition: border-color 0.2s;
+  }
+
+  .detail-row .value a:hover {
+    border-bottom-color: var(--accent2);
+  }
+
+  .card-confidence-bar {
+    margin-top: 12px;
+    height: 4px;
+    background: var(--bg2);
+    border-radius: 100px;
+    overflow: hidden;
+  }
+
+  .confidence-fill {
+    height: 100%;
+    border-radius: 100px;
+    transition: width 1s ease;
+    background: linear-gradient(90deg, var(--red), var(--yellow), var(--green));
+  }
+
+  .card-footer {
+    margin-top: 12px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 11px;
+    color: var(--text2);
+  }
+
+  .lead-number {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    color: var(--text2);
+    opacity: 0.6;
+  }
+
+  .potential-high {
+    color: var(--green);
+    font-weight: 600;
+  }
+
+  .potential-very-high {
+    color: var(--yellow);
+    font-weight: 600;
+  }
+
+  .potential-medium {
+    color: var(--blue);
+    font-weight: 600;
+  }
+
+  .potential-low {
+    color: var(--text2);
+    font-weight: 500;
+  }
+
+  /* EMPTY STATE */
+  .empty-state {
+    text-align: center;
+    padding: 80px 20px;
+    color: var(--text2);
+    grid-column: 1 / -1;
+  }
+
+  .empty-state .icon {
+    font-size: 48px;
+    margin-bottom: 16px;
+    opacity: 0.5;
+  }
+
+  .empty-state h3 {
+    font-size: 20px;
+    color: var(--text);
+    margin-bottom: 8px;
+  }
+
+  /* FOOTER */
+  .footer {
+    text-align: center;
+    padding: 32px 0;
+    border-top: 1px solid var(--border);
+    margin-top: 32px;
+  }
+
+  .footer p {
+    font-size: 13px;
+    color: var(--text2);
+  }
+
+  .footer .highlight {
+    color: var(--accent2);
+  }
+
+  /* RESPONSIVE */
+  @media (max-width: 768px) {
+    .leads-grid {
+      grid-template-columns: 1fr;
+    }
+    .header h1 {
+      font-size: 28px;
+    }
+    .filter-tabs {
+      overflow-x: auto;
+      flex-wrap: nowrap;
+      padding-bottom: 4px;
+    }
+    .filter-tab {
+      flex-shrink: 0;
+    }
+    .search-bar {
+      flex-direction: column;
+    }
+    .priority-toggle {
+      width: 100%;
+      justify-content: center;
+    }
+    .stats-row {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+
+  @media (max-width: 480px) {
+    .stats-row {
+      grid-template-columns: 1fr 1fr;
+      gap: 8px;
+    }
+    .stat-card { padding: 14px; }
+    .stat-number { font-size: 22px; }
+  }
+</style>
+</head>
+<body>
+
+<canvas id="particles-canvas"></canvas>
+
+<div class="container">
+
+  <!-- HEADER -->
+  <header class="header">
+    <div class="header-badge">
+      <span class="dot"></span>
+      Indore, Madhya Pradesh · May 2026
+    </div>
+    <h1>Indore Business<br>Intelligence</h1>
+    <p>30 verified business leads across 10 categories — identified through multi-pass digital presence analysis, Google Maps intelligence, directory mining, and direct verification.</p>
+  </header>
+
+  <!-- STATS -->
+  <div class="stats-row" id="statsRow"></div>
+
+  <!-- FILTERS -->
+  <div class="filter-section">
+    <div class="filter-tabs" id="filterTabs">
+      <button class="filter-tab active" data-category="all">All Categories</button>
+    </div>
+    <div class="search-bar">
+      <input type="text" id="searchInput" placeholder="Search by business name, category, area..." autocomplete="off">
+      <button class="priority-toggle" id="priorityToggle">⭐ Priority Leads Only</button>
+    </div>
+  </div>
+
+  <!-- LEADS GRID -->
+  <div class="leads-grid" id="leadsGrid"></div>
+
+  <!-- FOOTER -->
+  <footer class="footer">
+    <p>Built with the <span class="highlight">Deep Local Business Intelligence System</span> · Data verified May 14, 2026</p>
+  </footer>
+</div>
+
+<script>
+  // ========== DATA ==========
+  const leads = [
+    { id:1, name:"The Waterfall Restaurant Indore", cat:"Hotels & Banquets", type:"Restaurant / Banquet venue", address:"Near MITM College / Medicaps, Indore, MP 453331", phone:"+91 70003 59623", email:"", website:"", hasWebsite:false, confidence:85, potential:"HIGH", priority:false, icon:"🏨" },
+    { id:2, name:"Little Monk (Monk's Nirvana Hotel & Resort)", cat:"Hotels & Banquets", type:"Fine Dining Restaurant / Resort", address:"MR 10 Rd, Gram, Kumedi, Indore, MP 453555", phone:"+91 76101 00570", email:"", website:"littlemonk.co.in", hasWebsite:true, confidence:70, potential:"MEDIUM", priority:false, icon:"🏨" },
+    { id:3, name:"Essentia Luxury Hotel Indore", cat:"Hotels & Banquets", type:"Luxury Hotel / Convention Center", address:"Near World Cup Square, Pipliyahana, Indore, MP 452016", phone:"+91 88174 04615", email:"fom.indore@essentiahotels.in", website:"essentiahotels.in", hasWebsite:true, confidence:65, potential:"LOW", priority:false, icon:"🏨" },
+    { id:4, name:"Sayaji Hotel Indore", cat:"Hotels & Banquets", type:"5-Star Hotel", address:"H-1, Scheme No. 54, Vijay Nagar, Indore, MP 452010", phone:"+91 731 4006666", email:"", website:"sayajihotels.com", hasWebsite:true, confidence:60, potential:"LOW", priority:false, icon:"🏨" },
+    { id:5, name:"Atelier V | Casual Fine Dine Restaurant & Cocktail Bar", cat:"Fine Dining", type:"Fine Dining / Cocktail Bar", address:"Satguru Parinay, AB Rd, opp. C21 Mall, Indore", phone:"", email:"", website:"", hasWebsite:false, confidence:82, potential:"VERY HIGH", priority:true, icon:"🍽️" },
+    { id:6, name:"The Eighteen", cat:"Fine Dining", type:"Fine Dining Restaurant", address:"Indore (verified on Google Maps)", phone:"", email:"", website:"", hasWebsite:false, confidence:80, potential:"VERY HIGH", priority:true, icon:"🍽️" },
+    { id:7, name:"Alba Bistro", cat:"Fine Dining", type:"Bistro / Fine Dining", address:"Hotel Alba Premier, opp C21 Mall, AB Rd, Indore", phone:"", email:"", website:"", hasWebsite:false, confidence:78, potential:"HIGH", priority:true, icon:"🍽️" },
+    { id:8, name:"Indore Kitchen", cat:"Fine Dining", type:"North Indian Fine Dining", address:"H-2, Scheme No 54, Meghdoot Garden, Vijay Nagar, Indore", phone:"", email:"", website:"", hasWebsite:false, confidence:75, potential:"HIGH", priority:false, icon:"🍽️" },
+    { id:9, name:"Prithvi Fitness Arena", cat:"Gyms & Fitness", type:"Premium Gym", address:"2nd Floor, Gemini Mall, opp. Orbit Mall, Vijay Nagar, Scheme 54, Indore, MP 452010", phone:"+91 79098 08404", email:"", website:"prithvifitnessarena.in", hasWebsite:true, confidence:72, potential:"MEDIUM", priority:false, icon:"💪" },
+    { id:10, name:"BullRun Fitness Club", cat:"Gyms & Fitness", type:"Fitness Club", address:"4-5, Mangal Nagar Main Rd, Indore", phone:"", email:"", website:"", hasWebsite:false, confidence:85, potential:"VERY HIGH", priority:true, icon:"💪" },
+    { id:11, name:"Fitness Fuel Gym 2 Premium", cat:"Gyms & Fitness", type:"Premium Gym", address:"2137, Sudama Nagar Main Rd, Indore", phone:"", email:"", website:"", hasWebsite:false, confidence:80, potential:"HIGH", priority:false, icon:"💪" },
+    { id:12, name:"Smile Dental Clinic — Multi Speciality", cat:"Dental Clinics", type:"Multi-Speciality Dental Clinic", address:"322, Greater Brajeshwari, near agrawal fresh, Indore", phone:"+91 98260 92665", email:"", website:"", hasWebsite:true, confidence:68, potential:"MEDIUM", priority:false, icon:"🦷" },
+    { id:13, name:"Ekdant Multispeciality Dental Clinic", cat:"Dental Clinics", type:"Multi-Speciality Dental Clinic", address:"Om Gurudev Complex, G-18, opposite Apollo Hospital, Indore", phone:"+91 94078 71058", email:"", website:"", hasWebsite:false, confidence:88, potential:"VERY HIGH", priority:true, icon:"🦷" },
+    { id:14, name:"Sunita's Braces & Multispeciality Dental", cat:"Dental Clinics", type:"Dental Clinic (Braces Specialist)", address:"113 Anil Nagar, MR 9 Rd, near Barfani Dham, Indore", phone:"+91 79871 94350", email:"", website:"", hasWebsite:false, confidence:85, potential:"VERY HIGH", priority:true, icon:"🦷" },
+    { id:15, name:"Bhatnagar's Multispeciality Dental Clinic", cat:"Dental Clinics", type:"Dental Surgeon / Implant Centre", address:"E-4, HIG Main Rd, opp. Kotak Mahindra Bank, Indore", phone:"+91 96699 37000", email:"", website:"", hasWebsite:true, confidence:65, potential:"MEDIUM", priority:false, icon:"🦷" },
+    { id:16, name:"Saluja Eye Care Center", cat:"Eye Hospitals", type:"Eye Care / Ophthalmology", address:"4, Babji Nagar, AB Rd, near Mahindra Showroom, Indore", phone:"+91 78793 01301", email:"", website:"", hasWebsite:true, confidence:64, potential:"MEDIUM", priority:false, icon:"👁️" },
+    { id:17, name:"Indore Eye Hospital", cat:"Eye Hospitals", type:"Eye Hospital", address:"M.O.G. Lines, Dhar Rd, behind Gangwal Bus Stand, Indore", phone:"+91 731 4029720", email:"", website:"", hasWebsite:false, confidence:90, potential:"VERY HIGH", priority:true, icon:"👁️" },
+    { id:18, name:"EyeSite Eye Hospital & Retina Centre", cat:"Eye Hospitals", type:"Eye Hospital / Cataract / Lasik", address:"E-D 87, Ring Road, near Robot square, Indore", phone:"+91 79992 34171", email:"", website:"", hasWebsite:true, confidence:68, potential:"MEDIUM", priority:false, icon:"👁️" },
+    { id:19, name:"Rohit Eye Hospital & Child Care Centre", cat:"Eye Hospitals", type:"Eye Hospital / Child Care", address:"E-1, HIG Main Rd, opp. Rukmani Bajaj Showroom, near LIG Square, Indore", phone:"+91 89895 06139", email:"", website:"", hasWebsite:true, confidence:62, potential:"MEDIUM", priority:false, icon:"👁️" },
+    { id:20, name:"The Qalm Spa and Salon", cat:"Salons & Spas", type:"Premium Spa & Salon", address:"M-Floor, Indore Marriott Hotel, H-2 Scheme No 54, Indore", phone:"", email:"", website:"", hasWebsite:false, confidence:55, potential:"LOW", priority:false, icon:"💆" },
+    { id:21, name:"Beyond Infinity Unisex Spa", cat:"Salons & Spas", type:"Premium Spa", address:"Flat no 101, First floor, 124, behind Doshi Honda, Indore", phone:"", email:"", website:"", hasWebsite:false, confidence:85, potential:"VERY HIGH", priority:true, icon:"💆" },
+    { id:22, name:"The Ark Spa And Salon", cat:"Salons & Spas", type:"Premium Spa & Salon", address:"Malhar Mega Mall, Shop No 30 2nd Floor PU4, AB Rd, Indore", phone:"", email:"", website:"", hasWebsite:false, confidence:82, potential:"HIGH", priority:true, icon:"💆" },
+    { id:23, name:"Central Lab Indore", cat:"Diagnostic Centres", type:"Diagnostic Centre", address:"Yeshwant Plaza, M-117, 118, Indore", phone:"+91 78699 99931", email:"", website:"", hasWebsite:false, confidence:88, potential:"VERY HIGH", priority:true, icon:"🔬" },
+    { id:24, name:"Indore Path Lab", cat:"Diagnostic Centres", type:"Diagnostic / Health Checkup", address:"Atharv Medical Polyclinic, Nayi Sadak, Indore", phone:"+91 81039 58708", email:"", website:"", hasWebsite:true, confidence:66, potential:"MEDIUM", priority:false, icon:"🔬" },
+    { id:25, name:"Ideal Pathology and Diagnostic Center", cat:"Diagnostic Centres", type:"Diagnostic Centre / Sonography / Digital X-Ray", address:"Vidya Chamber, 8/47, Sapna Sangeeta Rd, near Tower Square, Indore", phone:"+91 90098 75000", email:"", website:"", hasWebsite:false, confidence:85, potential:"HIGH", priority:true, icon:"🔬" },
+    { id:26, name:"IIT-PULSE | Top IIT-JEE / NEET Institute", cat:"Coaching Institutes", type:"Competitive Exam Coaching", address:"106, TBC Tower, Geeta Bhawan Square, AB Rd, Indore", phone:"+91 98937 04288", email:"", website:"", hasWebsite:true, confidence:70, potential:"MEDIUM", priority:false, icon:"📚" },
+    { id:27, name:"MGCI | Best IIT, JEE & NEET Coaching — Geeta Bhawan", cat:"Coaching Institutes", type:"Competitive Exam Coaching", address:"First Floor, 3-A, Manorama Ganj, near Geeta Bhawan Square, Indore", phone:"+91 91715 55517", email:"", website:"", hasWebsite:true, confidence:68, potential:"MEDIUM", priority:false, icon:"📚" },
+    { id:28, name:"Gyanam Academy", cat:"Coaching Institutes", type:"Coaching (10th 12th PCB PCM IIT-JEE NEET)", address:"Office No. 302, Apollo Avenue, above Nafees Restaurant, Indore", phone:"", email:"", website:"", hasWebsite:false, confidence:80, potential:"HIGH", priority:false, icon:"📚" },
+    { id:29, name:"Best Solution Coaching | IIT-JEE, NEET", cat:"Coaching Institutes", type:"Competitive Exam Coaching", address:"Victory Chamber, 4-A Second Floor, Ratlam Kothi, Geeta Bhawan Rd, Indore", phone:"+91 94259 59956", email:"", website:"", hasWebsite:true, confidence:66, potential:"MEDIUM", priority:false, icon:"📚" },
+    { id:30, name:"The Indore Interio & Decorators", cat:"Interior Design & Real Estate", type:"Interior Design / Home Decor", address:"Indore (Google Maps)", phone:"+91 90390 18444", email:"", website:"", hasWebsite:true, confidence:64, potential:"MEDIUM", priority:false, icon:"🏠" }
+  ];
+
+  // ========== PARTICLE BACKGROUND ==========
+  (function() {
+    const canvas = document.getElementById('particles-canvas');
+    const ctx = canvas.getContext('2d');
+    let w, h, particles = [];
+
+    function resize() {
+      w = canvas.width = window.innerWidth;
+      h = canvas.height = window.innerHeight;
+    }
+    resize();
+    window.addEventListener('resize', resize);
+
+    class Particle {
+      constructor() {
+        this.reset();
+      }
+      reset() {
+        this.x = Math.random() * w;
+        this.y = Math.random() * h;
+        this.size = Math.random() * 2 + 0.5;
+        this.speedX = (Math.random() - 0.5) * 0.4;
+        this.speedY = (Math.random() - 0.5) * 0.4;
+        this.opacity = Math.random() * 0.5 + 0.1;
+      }
+      update() {
+        this.x += this.speedX;
+        this.y += this.speedY;
+        if (this.x < 0 || this.x > w || this.y < 0 || this.y > h) this.reset();
+      }
+      draw() {
+        ctx.beginPath();
+        ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+        ctx.fillStyle = `rgba(162, 155, 254, ${this.opacity})`;
+        ctx.fill();
+      }
+    }
+
+    for (let i = 0; i < 80; i++) particles.push(new Particle());
+
+    let mouse = { x: w/2, y: h/2 };
+    window.addEventListener('mousemove', e => { mouse.x = e.clientX; mouse.y = e.clientY; });
+
+    function animate() {
+      ctx.clearRect(0, 0, w, h);
+      particles.forEach(p => {
+        p.update();
+        p.draw();
+      });
+      // Draw connections near mouse
+      particles.forEach(p => {
+        const dx = mouse.x - p.x;
+        const dy = mouse.y - p.y;
+        const dist = Math.sqrt(dx*dx + dy*dy);
+        if (dist < 200) {
+          ctx.beginPath();
+          ctx.moveTo(p.x, p.y);
+          ctx.lineTo(mouse.x, mouse.y);
+          ctx.strokeStyle = `rgba(162, 155, 254, ${0.08 * (1 - dist/200)})`;
+          ctx.lineWidth = 0.5;
+          ctx.stroke();
+        }
+      });
+      requestAnimationFrame(animate);
+    }
+    animate();
+  })();
+
+  // ========== RENDER FUNCTIONS ==========
+  const statsRow = document.getElementById('statsRow');
+  const filterTabs = document.getElementById('filterTabs');
+  const leadsGrid = document.getElementById('leadsGrid');
+  const searchInput = document.getElementById('searchInput');
+  const priorityToggle = document.getElementById('priorityToggle');
+
+  let activeCategory = 'all';
+  let searchQuery = '';
+  let showPriorityOnly = false;
+
+  function getCategories() {
+    return [...new Set(leads.map(l => l.cat))];
+  }
+
+  function renderStats() {
+    const total = leads.length;
+    const noSite = leads.filter(l => !l.hasWebsite).length;
+    const highPotential = leads.filter(l => l.potential === 'VERY HIGH' || l.potential === 'HIGH').length;
+    const priority = leads.filter(l => l.priority).length;
+    const withPhone = leads.filter(l => l.phone).length;
+
+    statsRow.innerHTML = `
+      <div class="stat-card"><div class="stat-number">${total}</div><div class="stat-label">Total Leads</div></div>
+      <div class="stat-card red"><div class="stat-number">${noSite}</div><div class="stat-label">No Website</div></div>
+      <div class="stat-card orange"><div class="stat-number">${highPotential}</div><div class="stat-label">High Potential</div></div>
+      <div class="stat-card pink"><div class="stat-number">${priority}</div><div class="stat-label">Priority Targets</div></div>
+      <div class="stat-card blue"><div class="stat-number">${withPhone}</div><div class="stat-label">Contact Available</div></div>
+    `;
+  }
+
+  function renderFilters() {
+    const cats = getCategories();
+    filterTabs.innerHTML = `<button class="filter-tab active" data-category="all">All Categories</button>`;
+    cats.forEach(c => {
+      const count = leads.filter(l => l.cat === c).length;
+      filterTabs.innerHTML += `<button class="filter-tab" data-category="${c}">${c} (${count})</button>`;
+    });
+    document.querySelectorAll('.filter-tab').forEach(btn => {
+      btn.addEventListener('click', () => {
+        document.querySelectorAll('.filter-tab').forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+        activeCategory = btn.dataset.category;
+        renderLeads();
+      });
+    });
+  }
+
+  function renderLeads() {
+    const filtered = leads.filter(l => {
+      const matchCat = activeCategory === 'all' || l.cat === activeCategory;
+      const matchSearch = !searchQuery || 
+        l.name.toLowerCase().includes(searchQuery) || 
+        l.cat.toLowerCase().includes(searchQuery) || 
+        l.type.toLowerCase().includes(searchQuery) ||
+        l.address.toLowerCase().includes(searchQuery);
+      const matchPriority = !showPriorityOnly || l.priority;
+      return matchCat && matchSearch && matchPriority;
+    });
+
+    if (filtered.length === 0) {
+      leadsGrid.innerHTML = `<div class="empty-state"><div class="icon">🔍</div><h3>No leads found</h3><p>Try adjusting your filters or search query</p></div>`;
+      return;
+    }
+
+    leadsGrid.innerHTML = '';
+    filtered.forEach((l, i) => {
+      const siteBadge = l.hasWebsite 
+        ? `<span class="badge badge-website">✅ Website</span>`
+        : `<span class="badge badge-no-website">❌ No Website</span>`;
+      const priorityBadge = l.priority ? `<span class="badge badge-priority">⭐ Priority</span>` : '';
+      const confColor = l.confidence >= 80 ? 'var(--green)' : l.confidence >= 70 ? 'var(--yellow)' : 'var(--red)';
+      const cardClass = `lead-card${l.priority ? ' priority' : ''}${!l.hasWebsite ? ' no-site' : ''}`;
+      const potClass = l.potential === 'VERY HIGH' ? 'potential-very-high' : l.potential === 'HIGH' ? 'potential-high' : l.potential === 'MEDIUM' ? 'potential-medium' : 'potential-low';
+
+      leadsGrid.innerHTML += `
+        <div class="${cardClass}" style="animation-delay:${(i * 0.03).toFixed(2)}s">
+          <div class="card-header">
+            <div class="card-title">${l.icon} ${l.name}</div>
+            <div class="card-badges">
+              ${siteBadge}
+              ${priorityBadge}
+              <span class="badge badge-confidence">${l.confidence}%</span>
+            </div>
+          </div>
+          <div class="card-category">${l.cat} · ${l.type}</div>
+          <div class="card-details">
+            <div class="detail-row">
+              <span class="icon">📍</span>
+              <span class="value">${l.address}</span>
+            </div>
+            ${l.phone ? `<div class="detail-row"><span class="icon">📞</span><span class="value"><a href="tel:${l.phone.replace(/[^0-9+]/g,'')}">${l.phone}</a></span></div>` : `<div class="detail-row"><span class="icon">📞</span><span class="value" style="color:var(--text2);opacity:0.6;">Phone not publicly listed</span></div>`}
+            ${l.email ? `<div class="detail-row"><span class="icon">✉️</span><span class="value"><a href="mailto:${l.email}">${l.email}</a></span></div>` : ''}
+            ${l.hasWebsite && l.website ? `<div class="detail-row"><span class="icon">🌐</span><span class="value"><a href="https://${l.website}" target="_blank" rel="noopener">${l.website}</a></span></div>` : ''}
+          </div>
+          <div class="card-confidence-bar">
+            <div class="confidence-fill" style="width:${l.confidence}%;"></div>
+          </div>
+          <div class="card-footer">
+            <span class="lead-number">#${l.id} · Confidence ${l.confidence}%</span>
+            <span class="${potClass}">${l.potential} POTENTIAL</span>
+          </div>
+        </div>
+      `;
+    });
+  }
+
+  // ========== EVENT LISTENERS ==========
+  searchInput.addEventListener('input', (e) => {
+    searchQuery = e.target.value.toLowerCase().trim();
+    renderLeads();
+  });
+
+  priorityToggle.addEventListener('click', () => {
+    showPriorityOnly = !showPriorityOnly;
+    priorityToggle.classList.toggle('active');
+    priorityToggle.textContent = showPriorityOnly ? '⭐ Showing Priority Only' : '⭐ Priority Leads Only';
+    renderLeads();
+  });
+
+  // ========== INIT ==========
+  renderStats();
+  renderFilters();
+  renderLeads();
+</script>
+
+</body>
+</html>
